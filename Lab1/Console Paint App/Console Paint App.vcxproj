@@ -127,7 +127,18 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Canvas\Canvas.cpp" />
+    <ClCompile Include="Figures\Figures.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Menu\Menu.cpp" />
+    <ClCompile Include="Renderer\Renderer.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Canvas\Canvas.h" />
+    <ClInclude Include="Figures\Ellipse.h" />
+    <ClInclude Include="Figures\IFigure.h" />
+    <ClInclude Include="Menu\Menu.h" />
+    <ClInclude Include="Renderer\Renderer.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
