@@ -20,4 +20,6 @@ error will be shown in the screen._
 _Objects may be displayed with altered proportions due to the
 peculiarities of console output._
 
+_You need to set the console size to 140 by 41 chars and aligning to center._
+
 
