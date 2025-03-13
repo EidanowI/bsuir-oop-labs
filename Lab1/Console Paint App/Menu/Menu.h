@@ -1,6 +1,11 @@
 #pragma once
 #include <iostream>
+#include <string>
+
 #include "../Canvas/Canvas.h"
+#include "../Figures/Ellipse.h"
+
+#include "../Utils/ParamsValidator.h"
 
 
 
@@ -21,6 +26,8 @@ public:
 
 private:
 	void DrawOutput();
+
+	void InputFigureParams(char figure);
 
 	void AddOutputMsg(const std::string& msg);
 

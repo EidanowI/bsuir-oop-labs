@@ -7,9 +7,11 @@ public:
 	virtual void AddToCanvas(char* canvas) = 0;
 	virtual ~IFigure() {}
 
+	virtual int GetSquare() = 0;
 protected:
-	std::string name;
+	std::string m_name;
+	char m_fillChar;
 
-	int x;
-	int y;
+	int m_x;
+	int m_y;
 };

@@ -22,11 +22,13 @@ public:
 	void Clear();
 	void DrawAllFigures();
 
+	void AddFigure(IFigure* figure);
+
 	void Save(const LPWSTR& path);
 	void Load(const LPWSTR& path);
 
 private:
 	char m_screenBuffer[WIDTH * HEIGHT]{};
 
-	std::vector<IFigure> m_figures;
+	std::vector<IFigure*> m_figures;
 };

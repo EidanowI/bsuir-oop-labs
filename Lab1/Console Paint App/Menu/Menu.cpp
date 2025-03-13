@@ -51,7 +51,13 @@ void Menu::DrawMenu() {
 		std::cout << "\033[3;43;30mREMEMBER you can enter only integers, separated by space\033[0m\n";
 		char a;
 		std::cin >> a;
-		if (a == 'Q') m_state = CHOOSING_ACTION;
+		if (a == 'Q') {
+			m_state = CHOOSING_ACTION;
+			break;
+		}
+		InputFigureParams(a);
+		m_state = CHOOSING_ACTION;
+
 		break;
 	default:
 		break;
@@ -66,6 +72,7 @@ void Menu::SetCanvas(Canvas* pCanvas) {
 }
 
 void Menu::InputChoosingAction() {
+	AddOutputMsg("");
 	char input;
 	std::cin >> input;
 
@@ -112,4 +119,47 @@ LPWSTR Menu::FileDialogWindow(LPCWSTR title) {
 	else {
 		std::cerr << "\x1B[31mFILE DIALOG FAILED.\033[0m""" << std::endl;
 	}
+}
+
+void Menu::InputFigureParams(char figure) {
+	int params[5];
+	int paramCount = 4;
+
+	if (figure != 'E' && figure != 'T' && figure != 'R')
+	{
+		AddOutputMsg("Invalid figure type!!!");
+		return;
+	}
+	if (figure == 'T') paramCount = 5;
+
+	for (int i = 0; i < paramCount; i++) {
+		std::string param_str;
+		std::cin >> param_str;
+		params[i] = std::stoi(param_str);
+	}
+
+	char fill_char;
+	std::cin >> fill_char;
+
+	IFigure* pFigure;
+
+	switch (figure) {
+	case 'T':
+		break;
+	case 'E':
+		if (!ValidateellipseParams(params[0], params[1], params[2], params[3])) {
+			AddOutputMsg("Imposible to create elipse. Invalid params!!!");
+			return;
+		}
+		pFigure = new Elipse(params[0], params[1], params[2], params[3], fill_char);
+		AddOutputMsg("Draw ellipse with square " + std::to_string(pFigure->GetSquare()) + " chars!");
+		m_pCanvas->AddFigure(pFigure);
+		break;
+	case 'R':
+		break;
+	}
+}
+
+void Menu::AddOutputMsg(const std::string& msg) {
+	m_output_msg = msg;
 }

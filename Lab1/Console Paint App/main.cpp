@@ -4,6 +4,7 @@
 
 bool G_should_quit = false;
 
+#if WITH_UNIT_TESTING == 0
 int main() {
     /*printf("\n");
     printf("\x1B[31mTexting\033[0m\t\t");
@@ -36,3 +37,4 @@ int main() {
         std::cin.get();
     }
 }
+#endif
