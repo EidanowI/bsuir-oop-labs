@@ -46,7 +46,7 @@ void Menu::DrawMenu() {
 		std::cout << "Choose figure: ";
 		std::cout << "\x1B[33mE x y a b char\033[0m - draw ellipse; ";
 		std::cout << "\x1B[33mR x y a b char\033[0m - draw rect; ";
-		std::cout << "\x1B[33mT x y a b c char\033[0m - draw triangle; ";
+		std::cout << "\x1B[33mT x y a b char\033[0m - draw triangle; ";
 		std::cout << "\x1B[33mQ\033[0m - back; \n";
 		std::cout << "\033[3;43;30mREMEMBER you can enter only integers, separated by space\033[0m\n";
 		char a;
@@ -122,17 +122,15 @@ LPWSTR Menu::FileDialogWindow(LPCWSTR title) {
 }
 
 void Menu::InputFigureParams(char figure) {
-	int params[5];
-	int paramCount = 4;
+	int params[4];
 
 	if (figure != 'E' && figure != 'T' && figure != 'R')
 	{
 		AddOutputMsg("Invalid figure type!!!");
 		return;
 	}
-	if (figure == 'T') paramCount = 5;
 
-	for (int i = 0; i < paramCount; i++) {
+	for (int i = 0; i < 4; i++) {
 		std::string param_str;
 		std::cin >> param_str;
 		params[i] = std::stoi(param_str);
@@ -145,6 +143,14 @@ void Menu::InputFigureParams(char figure) {
 
 	switch (figure) {
 	case 'T':
+		if (!ValidateellipseParams(params[0], params[1], params[2], params[3])) {
+			AddOutputMsg("Imposible to create triangle. Invalid params!!!");
+			return;
+		}
+		pFigure = new Triangle(params[0], params[1], params[2], params[3], fill_char);
+		AddOutputMsg("Draw triangle with square " + std::to_string(pFigure->GetSquare()) + " chars!");
+		m_pCanvas->AddFigure(pFigure);
+		break;
 		break;
 	case 'E':
 		if (!ValidateellipseParams(params[0], params[1], params[2], params[3])) {

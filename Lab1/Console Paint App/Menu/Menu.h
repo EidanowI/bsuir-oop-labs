@@ -5,6 +5,7 @@
 #include "../Canvas/Canvas.h"
 #include "../Figures/Ellipse.h"
 #include "../Figures/Rect.h"
+#include "../Figures/Triangle.h"
 
 #include "../Utils/ParamsValidator.h"
 
