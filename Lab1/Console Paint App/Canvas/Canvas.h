@@ -29,8 +29,8 @@ public:
 	void MoveFigure(int index, int x, int y);
 	void FillFigure(int index, char f);
 
-	void Save(const LPWSTR& path);
-	void Load(const LPWSTR& path);
+	void Save(std::string fstr);
+	void Load(std::string fstr);
 
 private:
 	char m_screenBuffer[WIDTH * HEIGHT]{};

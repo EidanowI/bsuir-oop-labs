@@ -1,5 +1,6 @@
 ﻿#pragma once
 #include "../Canvas/Canvas.h"
+#include <fstream>
 
 
 class IFigure {
@@ -8,6 +9,9 @@ public:
 	virtual ~IFigure() {}
 
 	virtual int GetSquare() = 0;
+
+	virtual void SaveToFile(std::ofstream& ofs) = 0;
+
 	std::string GetName() { return m_name; }
 	void SetFillChar(char f) { m_fillChar = f; }
 	void Move(int x, int y) { m_x += x; m_y += y; }

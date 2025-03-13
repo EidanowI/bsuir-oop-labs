@@ -38,7 +38,7 @@ private:
 	int InputSelection();
 	void InputMovePos(int &x, int& y);
 
-	LPWSTR FileDialogWindow(LPCWSTR title);
+	std::string FileDialogWindow(LPCWSTR title);
 
 private:
 	Canvas* m_pCanvas;

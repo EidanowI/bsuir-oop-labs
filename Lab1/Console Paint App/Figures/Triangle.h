@@ -9,6 +9,8 @@ public:
 
 	void AddToCanvas(char* canvas) override;
 
+	void SaveToFile(std::ofstream& ofs) override;
+
 	int GetSquare() override;
 private:
 

@@ -117,23 +117,23 @@ void Menu::InputChoosingAction() {
 	}
 }
 
-LPWSTR Menu::FileDialogWindow(LPCWSTR title) {
-	OPENFILENAME ofn;
-	wchar_t szFile[260];
+std::string Menu::FileDialogWindow(LPCWSTR title) {
+	OPENFILENAMEA ofn;
+	char szFile[260];
 	ZeroMemory(&ofn, sizeof(ofn));
 	ofn.lStructSize = sizeof(ofn);
 	ofn.hwndOwner = NULL;
 	ofn.lpstrFile = szFile;
-	ofn.nMaxFile = sizeof(szFile);
 	ofn.lpstrFile[0] = '\0';
-	ofn.lpstrFilter = L"Lab1 files (*.lab1)\0";
-	ofn.lpstrTitle = L"Save File";
+	ofn.lpstrFilter = "Text Files (*.txt)\0*.txt\0All Files (*.*)\0*.*\0";
+	ofn.nMaxFile = sizeof(szFile);
+	ofn.lpstrTitle = "Save File";
 	ofn.Flags = OFN_OVERWRITEPROMPT;
 
-	if (GetSaveFileName(&ofn)) {
+	if (GetSaveFileNameA(&ofn)) {
 		return ofn.lpstrFile;
 	}
-	else {
+	else{
 		std::cerr << "\x1B[31mFILE DIALOG FAILED.\033[0m""" << std::endl;
 	}
 }

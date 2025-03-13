@@ -133,3 +133,19 @@ int Triangle::GetSquare() {
 	}
 	return square;
 }
+
+void Elipse::SaveToFile(std::ofstream& ofs) {
+	ofs << 'e';
+
+	ofs.write((char*)this, sizeof(Elipse));
+}
+void Rect::SaveToFile(std::ofstream& ofs) {
+	ofs << 'r';
+
+	ofs.write((char*)this, sizeof(Rect));
+}
+void Triangle::SaveToFile(std::ofstream& ofs) {
+	ofs << 't';
+
+	ofs.write((char*)this, sizeof(Triangle));
+}
