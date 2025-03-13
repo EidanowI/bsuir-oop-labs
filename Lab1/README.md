@@ -7,11 +7,11 @@ Completed by Fiodar Kavalchuk, group 353504
 The program must be able to:
 
 - draw 3 types of figures: rectangle, triangle, ellipse
-- erase an object
+- delete an object
 - move object
-- add a background to a figure
+- choose fill char for object
 - save canvas as a file
-- load from file
+- load canvas from file
 - undo/redo action
 
 _Warning: all numeric input values must be integers. If something goes wrong
