@@ -46,6 +46,7 @@ void Canvas::MoveFigure(int index, int x, int y) {
 void Canvas::FillFigure(int index, char f) {
     if (index == -1) return;
 
+    m_figures[index]->SetFillChar(f);
 }
 
 void Canvas::Save(const LPWSTR& path){}

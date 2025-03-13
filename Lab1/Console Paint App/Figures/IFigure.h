@@ -9,6 +9,7 @@ public:
 
 	virtual int GetSquare() = 0;
 	std::string GetName() { return m_name; }
+	void SetFillChar(char f) { m_fillChar = f; }
 protected:
 	std::string m_name;
 	char m_fillChar;

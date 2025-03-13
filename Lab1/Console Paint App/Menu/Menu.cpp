@@ -31,19 +31,28 @@ void Menu::DrawMenu() {
 	case CHOOSING_OBJECT:
 	case MOVE_OBJECT:
 	case DELETE_OBJECT:
+	case FILL_OBJECT:
 		if (m_state == CHOOSING_OBJECT) break;
 
 		index =	InputSelection();
 
 		if (m_state == MOVE_OBJECT) {
-			std::cout << "logic to move objects";
+
+
+			AddOutputMsg("Move figure with name " + m_pCanvas->GetFigures()[index]->GetName());
+			m_pCanvas->DeleteFigure(index);
 		}
 		else if(m_state == DELETE_OBJECT){
 			AddOutputMsg("Delete figure with name " + m_pCanvas->GetFigures()[index]->GetName());
 			m_pCanvas->DeleteFigure(index);
 		}
 		else if (m_state == FILL_OBJECT) {
+			std::cout << "Input fill char: ";
+			char fill_char;
+			std::cin >> fill_char;
 
+			AddOutputMsg("Fill figure with name " + m_pCanvas->GetFigures()[index]->GetName() + "with ");
+			m_pCanvas->FillFigure(index, fill_char);
 		}
 		break;
 	case INPUT_DRAW_COMMAND:
@@ -90,6 +99,9 @@ void Menu::InputChoosingAction() {
 		break;
 	case 'M':
 		m_state = MOVE_OBJECT;
+		break;
+	case 'F':
+		m_state = FILL_OBJECT;
 		break;
 	case 'S'://Save
 		m_pCanvas->Save(FileDialogWindow(L"Save file"));
@@ -189,6 +201,7 @@ int Menu::InputSelection() {
 		return -1;
 	}
 	std::cout << "\x1B[33mQ\033[0m - to quit!\n";
+	std::cout << "Input object index\n";
 	for (int i = 0; i < m_pCanvas->GetFigures().size(); i++) {
 		std::cout << "\x1B[33m" << i << ". \033[0m" << m_pCanvas->GetFigures()[i]->GetName() << "\n";
 	}
