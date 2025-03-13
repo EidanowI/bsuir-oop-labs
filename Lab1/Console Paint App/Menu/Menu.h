@@ -38,6 +38,8 @@ private:
 	int InputSelection();
 	void InputMovePos(int &x, int& y);
 
+	std::string FileDialogLoadWindow(std::string title);
+
 	std::string FileDialogWindow(std::string title);
 
 private:

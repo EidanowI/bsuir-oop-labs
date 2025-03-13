@@ -108,7 +108,7 @@ void Menu::InputChoosingAction() {
 		m_pCanvas->Save(FileDialogWindow("Save file"));
 		break;
 	case 'L'://Load
-		m_pCanvas->Load(FileDialogWindow("Load file"));
+		m_pCanvas->Load(FileDialogLoadWindow("Load file"));
 		break;
 	case 'Q':
 		G_should_quit = true;
@@ -134,6 +134,26 @@ std::string Menu::FileDialogWindow(std::string title) {
 		return ofn.lpstrFile;
 	}
 	else{
+		std::cerr << "\x1B[31mFILE DIALOG FAILED.\033[0m""" << std::endl;
+	}
+}
+std::string Menu::FileDialogLoadWindow(std::string title) {
+	OPENFILENAMEA ofn;
+	char szFile[260];
+	ZeroMemory(&ofn, sizeof(ofn));
+	ofn.lStructSize = sizeof(ofn);
+	ofn.hwndOwner = NULL;
+	ofn.lpstrFile = szFile;
+	ofn.lpstrFile[0] = '\0';
+	ofn.lpstrFilter = "Lab1 Files (*.lab1)\0*.lab1\0";
+	ofn.nMaxFile = sizeof(szFile);
+	ofn.lpstrTitle = title.c_str();
+	ofn.Flags = OFN_PATHMUSTEXIST | OFN_FILEMUSTEXIST;
+
+	if (GetOpenFileNameA(&ofn)) {
+		return ofn.lpstrFile;
+	}
+	else {
 		std::cerr << "\x1B[31mFILE DIALOG FAILED.\033[0m""" << std::endl;
 	}
 }
