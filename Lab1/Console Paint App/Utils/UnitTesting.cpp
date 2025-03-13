@@ -3,6 +3,7 @@
 #include <cassert>
 #include "ParamsValidator.h"
 #include "../Figures/Ellipse.h"
+#include "../Figures/Rect.h"
 
 
 int main() {
@@ -32,6 +33,10 @@ int main() {
 	assert(ValidateRectParams(0, 0, 0, 30) == false);
 	assert(ValidateRectParams(0, 0, 30, 0) == false);
 	assert(ValidateRectParams(0, 0, 0, 0) == false);
+
+	assert(Rect(0, 0, 10, 10, 'a').GetSquare() == 100);
+	assert(Rect(0, 0, 1, 1, 'a').GetSquare() == 1);
+	assert(Rect(0, 0, 10, 5, 'a').GetSquare() == 50);
 }
 
 
