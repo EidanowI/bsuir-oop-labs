@@ -2,6 +2,7 @@
 #include <iostream>
 #include <cassert>
 #include "ParamsValidator.h"
+#include "../Figures/Ellipse.h"
 
 
 int main() {
@@ -21,7 +22,9 @@ int main() {
 	assert(ValidateellipseParams(0, 0, 0, 30) == false);
 	assert(ValidateellipseParams(0, 0, 30, 0) == false);
 
-
+	assert(Elipse(4, 4, 1, 1, 'a').GetSquare() == 5);
+	assert(Elipse(10, 10, 5, 5, 'a').GetSquare() == 81);
+	assert(Elipse(10, 10, 10, 5, 'a').GetSquare() == 159);
 }
 
 
