@@ -52,7 +52,7 @@ void Canvas::FillFigure(int index, char f) {
 void Canvas::Save(std::string path){
     if (m_figures.empty()) return;
 
-    std::ofstream ofs(path);
+    std::ofstream ofs(path + ".lab1");
     if (ofs.is_open()) {
         for (int i = 0; i < m_figures.size(); i++) {
             m_figures[i]->SaveToFile(ofs);

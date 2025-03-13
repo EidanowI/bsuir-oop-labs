@@ -105,10 +105,10 @@ void Menu::InputChoosingAction() {
 		m_state = FILL_OBJECT;
 		break;
 	case 'S'://Save
-		m_pCanvas->Save(FileDialogWindow(L"Save file"));
+		m_pCanvas->Save(FileDialogWindow("Save file"));
 		break;
 	case 'L'://Load
-		m_pCanvas->Load(FileDialogWindow(L"Load file"));
+		m_pCanvas->Load(FileDialogWindow("Load file"));
 		break;
 	case 'Q':
 		G_should_quit = true;
@@ -117,7 +117,7 @@ void Menu::InputChoosingAction() {
 	}
 }
 
-std::string Menu::FileDialogWindow(LPCWSTR title) {
+std::string Menu::FileDialogWindow(std::string title) {
 	OPENFILENAMEA ofn;
 	char szFile[260];
 	ZeroMemory(&ofn, sizeof(ofn));
@@ -125,9 +125,9 @@ std::string Menu::FileDialogWindow(LPCWSTR title) {
 	ofn.hwndOwner = NULL;
 	ofn.lpstrFile = szFile;
 	ofn.lpstrFile[0] = '\0';
-	ofn.lpstrFilter = "Text Files (*.txt)\0*.txt\0All Files (*.*)\0*.*\0";
+	ofn.lpstrFilter = "Lab1 Files (*.lab1)\0*.lab1\0";
 	ofn.nMaxFile = sizeof(szFile);
-	ofn.lpstrTitle = "Save File";
+	ofn.lpstrTitle = title.c_str();
 	ofn.Flags = OFN_OVERWRITEPROMPT;
 
 	if (GetSaveFileNameA(&ofn)) {
