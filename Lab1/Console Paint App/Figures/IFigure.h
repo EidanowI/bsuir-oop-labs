@@ -10,6 +10,7 @@ public:
 	virtual int GetSquare() = 0;
 	std::string GetName() { return m_name; }
 	void SetFillChar(char f) { m_fillChar = f; }
+	void Move(int x, int y) { m_x += x; m_y += y; }
 protected:
 	std::string m_name;
 	char m_fillChar;

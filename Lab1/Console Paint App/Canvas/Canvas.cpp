@@ -41,7 +41,7 @@ void Canvas::DeleteFigure(int index) {
 void Canvas::MoveFigure(int index, int x, int y) {
     if (index == -1) return;
 
-   
+    m_figures[index]->Move(x, y);
 }
 void Canvas::FillFigure(int index, char f) {
     if (index == -1) return;

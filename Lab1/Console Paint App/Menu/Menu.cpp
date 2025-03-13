@@ -37,10 +37,11 @@ void Menu::DrawMenu() {
 		index =	InputSelection();
 
 		if (m_state == MOVE_OBJECT) {
-
+			int x, y;
+			InputMovePos(x, y);
 
 			AddOutputMsg("Move figure with name " + m_pCanvas->GetFigures()[index]->GetName());
-			m_pCanvas->DeleteFigure(index);
+			m_pCanvas->MoveFigure(index, x, y);
 		}
 		else if(m_state == DELETE_OBJECT){
 			AddOutputMsg("Delete figure with name " + m_pCanvas->GetFigures()[index]->GetName());
@@ -221,5 +222,27 @@ int Menu::InputSelection() {
 		else {
 			std::cout << "Invalid index!\n";
 		}
+	}
+}
+
+void Menu::InputMovePos(int& x, int& y) {
+	while (true) {
+		std::cout << "input x: ";
+		std::string inp;
+		std::cin >> inp;
+
+		x = std::stoi(inp);
+		if (x >= 0) break;
+		std::cout << "Invalid x!\n";
+	}
+
+	while (true) {
+		std::cout << "input y: ";
+		std::string inp;
+		std::cin >> inp;
+
+		y = std::stoi(inp);
+		if (y >= 0) break;
+		std::cout << "Invalid y!\n";
 	}
 }

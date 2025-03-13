@@ -36,6 +36,7 @@ private:
 
 	void InputChoosingAction();
 	int InputSelection();
+	void InputMovePos(int &x, int& y);
 
 	LPWSTR FileDialogWindow(LPCWSTR title);
 
