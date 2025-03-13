@@ -37,6 +37,13 @@ int main() {
 	assert(Rect(0, 0, 10, 10, 'a').GetSquare() == 100);
 	assert(Rect(0, 0, 1, 1, 'a').GetSquare() == 1);
 	assert(Rect(0, 0, 10, 5, 'a').GetSquare() == 50);
+
+	assert(ValidateTriangleParams(0, 0, 30, 30) == true);
+	assert(ValidateTriangleParams(-1, 0, 30, 30) == false);
+	assert(ValidateTriangleParams(0, -1, 30, 30) == false);
+	assert(ValidateTriangleParams(0, 0, 0, 30) == false);
+	assert(ValidateTriangleParams(0, 0, 30, 0) == false);
+	assert(ValidateTriangleParams(0, 0, 0, 0) == false);
 }
 
 

@@ -31,3 +31,12 @@ bool ValidateRectParams(int x, int y, int a, int b) {
 
     return true;
 }
+bool ValidateTriangleParams(int x, int y, int a, int b) {
+    if (!ValidateHorizPosition(x)) return false;
+    if (!ValidateVerticalPosition(y)) return false;
+
+    if (a <= 0) return false;
+    if (b <= 0) return false;
+
+    return true;
+}
