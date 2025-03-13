@@ -38,8 +38,12 @@ void Menu::DrawMenu() {
 		if (m_state == MOVE_OBJECT) {
 			std::cout << "logic to move objects";
 		}
-		else {
-			std::cout << "logic to delete objects";
+		else if(m_state == DELETE_OBJECT){
+			AddOutputMsg("Delete figure with name " + m_pCanvas->GetFigures()[index]->GetName());
+			m_pCanvas->DeleteFigure(index);
+		}
+		else if (m_state == FILL_OBJECT) {
+
 		}
 		break;
 	case INPUT_DRAW_COMMAND:
@@ -189,16 +193,20 @@ int Menu::InputSelection() {
 		std::cout << "\x1B[33m" << i << ". \033[0m" << m_pCanvas->GetFigures()[i]->GetName() << "\n";
 	}
 
-	std::string inp;
-	std::cin >> inp;
-
-	if (inp[0] == 'Q') {
-		m_state = CHOOSING_ACTION;
-		return -1;
-	}
-
 	while (true) {
+		std::string inp;
+		std::cin >> inp;
+
+		if (inp[0] == 'Q') {
+			m_state = CHOOSING_ACTION;
+			return -1;
+		}
+
 		int index = std::stoi(inp);
-		if (index >= 0 && index < m_pCanvas->GetFigures().size()) return index;
+		if (index >= 0 && index < m_pCanvas->GetFigures().size()) 
+			return index;
+		else {
+			std::cout << "Invalid index!\n";
+		}
 	}
 }

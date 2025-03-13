@@ -25,6 +25,10 @@ public:
 
 	void AddFigure(IFigure* figure);
 
+	void DeleteFigure(int index);
+	void MoveFigure(int index, int x, int y);
+	void FillFigure(int index, char f);
+
 	void Save(const LPWSTR& path);
 	void Load(const LPWSTR& path);
 

@@ -32,5 +32,21 @@ void Canvas::AddFigure(IFigure* figure) {
     m_figures.push_back(figure);
 }
 
+void Canvas::DeleteFigure(int index) {
+    if (index == -1) return;
+
+    delete m_figures[index];
+    m_figures.erase(m_figures.begin() + index);
+}
+void Canvas::MoveFigure(int index, int x, int y) {
+    if (index == -1) return;
+
+   
+}
+void Canvas::FillFigure(int index, char f) {
+    if (index == -1) return;
+
+}
+
 void Canvas::Save(const LPWSTR& path){}
 void Canvas::Load(const LPWSTR& path){}
