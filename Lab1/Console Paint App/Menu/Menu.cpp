@@ -156,6 +156,13 @@ void Menu::InputFigureParams(char figure) {
 		m_pCanvas->AddFigure(pFigure);
 		break;
 	case 'R':
+		if (!ValidateRectParams(params[0], params[1], params[2], params[3])) {
+			AddOutputMsg("Imposible to create rect. Invalid params!!!");
+			return;
+		}
+		pFigure = new Rect(params[0], params[1], params[2], params[3], fill_char);
+		AddOutputMsg("Draw rect with square " + std::to_string(pFigure->GetSquare()) + " chars!");
+		m_pCanvas->AddFigure(pFigure);
 		break;
 	}
 }

@@ -25,6 +25,13 @@ int main() {
 	assert(Elipse(4, 4, 1, 1, 'a').GetSquare() == 5);
 	assert(Elipse(10, 10, 5, 5, 'a').GetSquare() == 81);
 	assert(Elipse(10, 10, 10, 5, 'a').GetSquare() == 159);
+
+	assert(ValidateRectParams(0, 0, 30, 30) == true);
+	assert(ValidateRectParams(-1, 0, 30, 30) == false);
+	assert(ValidateRectParams(0, -1, 30, 30) == false);
+	assert(ValidateRectParams(0, 0, 0, 30) == false);
+	assert(ValidateRectParams(0, 0, 30, 0) == false);
+	assert(ValidateRectParams(0, 0, 0, 0) == false);
 }
 
 
