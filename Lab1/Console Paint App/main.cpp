@@ -34,7 +34,6 @@ int main() {
 
     while (!G_should_quit) {
         rnd.Render();
-        std::cin.get();
     }
 }
 #endif

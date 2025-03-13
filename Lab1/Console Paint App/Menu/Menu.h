@@ -34,6 +34,7 @@ private:
 	void AddOutputMsg(const std::string& msg);
 
 	void InputChoosingAction();
+	int InputSelection();
 
 	LPWSTR FileDialogWindow(LPCWSTR title);
 

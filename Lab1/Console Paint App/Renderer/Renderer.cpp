@@ -15,6 +15,7 @@ void Renderer::Render() {
 	m_canvas.Clear();
 	m_canvas.DrawAllFigures();
 
+	std::cout << "\n";
 	for (int i = 0; i < HEIGHT + 1; i++) {
 		for (int j = 0; j < WIDTH + 2; j++) {
 			if (i == 0 || i == HEIGHT || j == 0 || j == WIDTH + 1)

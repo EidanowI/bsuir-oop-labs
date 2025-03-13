@@ -8,7 +8,7 @@ extern bool G_should_quit;
 void Menu::DrawMenu() {
 	for (int i = 0; i < 68; i++, std::cout << ' ');
 	std::cout << "\x1B[32mMENU\033[0m\n";
-
+	int index;
 	switch (m_state)
 	{
 	case CHOOSING_ACTION:
@@ -31,9 +31,9 @@ void Menu::DrawMenu() {
 	case CHOOSING_OBJECT:
 	case MOVE_OBJECT:
 	case DELETE_OBJECT:
-		///TODO logic to select objects
-		std::cout << "logic to select objects ";
 		if (m_state == CHOOSING_OBJECT) break;
+
+		index =	InputSelection();
 
 		if (m_state == MOVE_OBJECT) {
 			std::cout << "logic to move objects";
@@ -175,4 +175,30 @@ void Menu::InputFigureParams(char figure) {
 
 void Menu::AddOutputMsg(const std::string& msg) {
 	m_output_msg = msg;
+}
+
+int Menu::InputSelection() {
+	if (m_pCanvas->GetFigures().empty())
+	{
+		AddOutputMsg("No items to select");
+		m_state = CHOOSING_ACTION;
+		return -1;
+	}
+	std::cout << "\x1B[33mQ\033[0m - to quit!\n";
+	for (int i = 0; i < m_pCanvas->GetFigures().size(); i++) {
+		std::cout << "\x1B[33m" << i << ". \033[0m" << m_pCanvas->GetFigures()[i]->GetName() << "\n";
+	}
+
+	std::string inp;
+	std::cin >> inp;
+
+	if (inp[0] == 'Q') {
+		m_state = CHOOSING_ACTION;
+		return -1;
+	}
+
+	while (true) {
+		int index = std::stoi(inp);
+		if (index >= 0 && index < m_pCanvas->GetFigures().size()) return index;
+	}
 }

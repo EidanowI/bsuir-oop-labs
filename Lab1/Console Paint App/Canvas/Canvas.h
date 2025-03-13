@@ -18,6 +18,7 @@ public:
 	~Canvas();
 
 	char* GetScreenBuffer();
+	std::vector<IFigure*>& GetFigures() { return m_figures; }
 
 	void Clear();
 	void DrawAllFigures();
