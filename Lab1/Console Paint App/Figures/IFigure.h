@@ -8,6 +8,7 @@ public:
 	virtual ~IFigure() {}
 
 	virtual int GetSquare() = 0;
+	std::string GetName() { return m_name; }
 protected:
 	std::string m_name;
 	char m_fillChar;

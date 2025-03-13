@@ -1,3 +1,5 @@
+#include <string>
+
 #include "../Canvas/Canvas.h"
 #include "IFigure.h"
 #include "Ellipse.h"
@@ -7,7 +9,7 @@
 
 
 Elipse::Elipse(int x, int y, int a, int b, char f){
-	m_name = "Ellipse #" + (char)('a' + rand() % 'x') + (char)('a' + rand() % 'x');
+	m_name = "Ellipse #" + std::to_string(rand() % 1000);
 	m_x = x;
 	m_y = y;
 	m_a = a;
@@ -45,7 +47,7 @@ int Elipse::GetSquare() {
 }
 
 Rect::Rect(int x, int y, int a, int b, char f) {
-	m_name = "Rect #" + (char)('a' + rand() % 'x') + (char)('a' + rand() % 'x');
+	m_name = "Rect #" + std::to_string(rand() % 1000);
 	m_x = x;
 	m_y = y;
 	m_a = a;
@@ -79,7 +81,7 @@ int Rect::GetSquare() {
 }
 
 Triangle::Triangle(int x, int y, int a, int b, char f) {
-	m_name = "Rect #" + (char)('a' + rand() % 'x') + (char)('a' + rand() % 'x');
+	m_name = "Triangle #" + std::to_string(rand() % 1000);
 	m_x = x;
 	m_y = y;
 	m_a = a;
