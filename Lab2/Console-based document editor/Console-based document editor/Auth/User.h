@@ -3,13 +3,16 @@
 #include <string>
 #include <fstream>
 #include <map>
+#include <iostream>
 
 
 
 class User {
+	friend class UserManager;
 public:
 	User(std::string login, std::string password);
 	User(std::string login, std::string password, bool isAdmin);
+	User(std::string login, unsigned int pasword_hash);
 
 	bool ComparePassword(std::string& password);
 

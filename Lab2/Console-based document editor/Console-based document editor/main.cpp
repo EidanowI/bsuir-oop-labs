@@ -18,11 +18,11 @@ int main() {
 			char in;
 			std::cin >> in;
 
-			if (in == 'Q') {
+			if (in == 'Q' || in == 'q') {
 				G_is_editor_rinning = false;
 				break;
 			}
-			else if (in == 'R') {
+			else if (in == 'R' || in == 'r') {
 				while (true) {
 					std::cout << "Login: ";
 					std::string login;
@@ -43,7 +43,7 @@ int main() {
 				}
 				break;
 			}
-			if (in == 'L') {
+			if (in == 'L' || in == 'l') {
 				while (true) {
 					std::cout << "Login: ";
 					std::string login;
@@ -76,8 +76,7 @@ int main() {
 
 		while (UserManager::GetCurrentUser()) {
 			system("CLS");
-
-			std::cout << "You loged as " << UserManager::GetCurrentUser()->GetLogin() << '\n';
+			std::cout << "You loged as \033[32m" << UserManager::GetCurrentUser()->GetLogin() << "\033[0m\n";
 
 			std::cout << "1. - logout;\n";
 			std::cout << "2. - open doc;\n";
