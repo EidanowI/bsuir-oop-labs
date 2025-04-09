@@ -1,10 +1,17 @@
 #include <iostream>
 #include "Auth/User.h"
+#include "Document.h"
 
 
 bool G_is_editor_rinning = true;
+
+
+
 int main() {
 	UserManager::Init();
+
+	Document dd{};
+	dd.Edit();
 
 	while (G_is_editor_rinning) {
 		system("CLS");
@@ -79,7 +86,7 @@ int main() {
 			std::cout << "You loged as \033[32m" << UserManager::GetCurrentUser()->GetLogin() << "\033[0m\n";
 
 			std::cout << "1. - logout;\n";
-			std::cout << "2. - open doc;\n";
+			std::cout << "2. - open document;\n";
 
 			char in;
 			std::cin >> in;
@@ -89,7 +96,8 @@ int main() {
 				break;
 			}
 			else if (in == '2') {
-				std::cout << "open doc";
+				Document dd{};
+				dd.Edit();
 			}
 		}
 		//check if in user show 1.logout - continue

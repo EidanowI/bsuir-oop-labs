@@ -1,4 +1,5 @@
 #pragma once
+#include <iostream>
 
 
 enum EDITOR_STATE {
@@ -7,10 +8,5 @@ enum EDITOR_STATE {
 
 class Editor {
 public:
-	void Run();
-
-	void DrawAuthMenu();
-
-private:
-	EDITOR_STATE m_state;
+	
 };
