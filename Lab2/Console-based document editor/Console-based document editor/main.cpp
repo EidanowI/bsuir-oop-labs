@@ -7,6 +7,8 @@ int main() {
 	UserManager::Init();
 
 	while (G_is_editor_rinning) {
+		system("CLS");
+
 		while (true) {
 			std::cout << "Q - Quit;\n";
 			std::cout << "R - Register;\n";
@@ -71,6 +73,26 @@ int main() {
 			std::cout << "Invalid command! Use given comands.\n";
 		}
 
+
+		while (UserManager::GetCurrentUser()) {
+			system("CLS");
+
+			std::cout << "You loged as " << UserManager::GetCurrentUser()->GetLogin() << '\n';
+
+			std::cout << "1. - logout;\n";
+			std::cout << "2. - open doc;\n";
+
+			char in;
+			std::cin >> in;
+
+			if (in == '1') {
+				UserManager::Logout();
+				break;
+			}
+			else if (in == '2') {
+				std::cout << "open doc";
+			}
+		}
 		//check if in user show 1.logout - continue
 		//2. - open doc
 		//need one more llop for open the doc after which again logout-doc menu

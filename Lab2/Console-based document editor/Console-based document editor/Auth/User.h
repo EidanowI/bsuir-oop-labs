@@ -13,6 +13,8 @@ public:
 
 	bool ComparePassword(std::string& password);
 
+	char* GetLogin();
+
 private:
 	std::string m_login;
 	unsigned int m_pasword_hash;

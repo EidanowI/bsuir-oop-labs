@@ -24,6 +24,10 @@ bool User::ComparePassword(std::string& password) {
 	return m_pasword_hash == Hash(password);
 }
 
+char* User::GetLogin() {
+	return m_login.data();
+}
+
 
 User* UserManager::s_currentUser = nullptr;
 std::map<unsigned int, User*> UserManager::s_users{};
