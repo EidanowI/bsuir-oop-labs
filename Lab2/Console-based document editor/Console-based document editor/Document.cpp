@@ -8,10 +8,10 @@ static bool aa = true;
 void Document::Edit() {
 	aa = true;
 
-	std::cout << "Aditing is allowed for: " << "\n";
-	std::cout << "Manage permissions." << "\n";
-	std::cout << "Export to local machine." << "\n";
-	std::cout << "Export to cloud." << "\n";
+	//std::cout << "Aditing is allowed for: " << "\n";
+	//std::cout << "Manage permissions." << "\n";
+	//std::cout << "Export to local machine." << "\n";
+	//std::cout << "Export to cloud." << "\n";
 
 
 	while (true) {
@@ -24,14 +24,40 @@ void Document::Edit() {
 
 		for (int key = 0; key < 256; key++) {
 			if (GetAsyncKeyState(key) & 0x8000){
-				//std::cout << key << "  ";
 				if (key == 37) {
 					if (is_shift) {
 
 					}
 					else {
-						std::cout << '\b';
+						MoveCursorLeft();
 					}
+				}
+				if (key == 39) {
+					if (is_shift) {
+
+					}
+					else {
+						MoveCursorRight();
+					}
+				}
+				//std::cout << key << " ";
+				/*if (key == 13) {
+					std::cout << '\n';
+				}
+
+				if (key == 37) {
+					if (is_shift) {
+
+					}
+					else {
+						std::cout << "\033[D";
+					}
+				}
+				if (key == 38) {
+					std::cout << "\033[A";
+				}
+				if (key == 40) {
+					std::cout << "\033[B";
 				}
 				if (key == 39) {
 					if (is_shift) {
@@ -75,15 +101,17 @@ void Document::Edit() {
 				if (key == 219) std::cout << (is_shift ? '{' : '[');
 				if (key == 221) std::cout << (is_shift ? '}' : ']');
 				if (key == 186) std::cout << (is_shift ? ':' : ';');
-				if (key == 222) std::cout << (is_shift ? '"' : '\'');
+				if (key == 222) std::cout << (is_shift ? '"' : '\'');*/
 
 
 				if (key >= 'A' && key <= 'Z') {
 					if (!is_shift) {
-						std::cout << (char)(key + 'a' - 'A');
+
+						//std::cout << "\033[K";
+						AddChar(false, (char)(key + 'a' - 'A'));
 					}
 					else {
-						std::cout << (char)key;
+						AddChar(false, (char)key);
 					}
 				}
 			}
