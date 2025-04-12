@@ -15,8 +15,14 @@ public:
 	User(std::string login, unsigned int pasword_hash);
 
 	bool ComparePassword(std::string& password);
+	bool CompareLogin(std::string login);
+	bool CompareLogin(unsigned int hash);
 
-	char* GetLogin();
+	bool IsAdmin();
+
+	const char* GetLogin();
+
+	void WriteToStream(std::ofstream& ofs);
 
 private:
 	std::string m_login;
@@ -34,6 +40,8 @@ public:
 	static bool Login(std::string login, std::string password);
 	static User* GetCurrentUser();
 	static void Logout();
+
+	static User* GetUserByLoginHash(unsigned int hash);
 
 private:
 	static User* s_currentUser;

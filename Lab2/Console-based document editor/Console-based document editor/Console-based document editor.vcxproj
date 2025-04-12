@@ -132,13 +132,16 @@
     <ClCompile Include="Auth\Auth.cpp" />
     <ClCompile Include="Document.cpp" />
     <ClCompile Include="Editor.cpp" />
+    <ClCompile Include="Line.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Auth\AuthManager.h" />
+    <ClInclude Include="Content.h" />
     <ClInclude Include="Document.h" />
     <ClInclude Include="Editor.h" />
     <ClInclude Include="Auth\User.h" />
+    <ClInclude Include="Line.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

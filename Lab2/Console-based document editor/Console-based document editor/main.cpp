@@ -10,8 +10,8 @@ bool G_is_editor_rinning = true;
 int main() {
 	UserManager::Init();
 
-	Document dd{};
-	dd.Edit();
+	//Document dd{};
+	//dd.Edit();
 
 	while (G_is_editor_rinning) {
 		system("CLS");
@@ -96,15 +96,14 @@ int main() {
 				break;
 			}
 			else if (in == '2') {
-				Document dd{};
-				dd.Edit();
+				std::cout << "Doc name: ";
+				std::string name;
+				std::cin >> name;
+				Document document(UserManager::GetCurrentUser(), name);
+
+				document.PrintMenu();
 			}
 		}
-		//check if in user show 1.logout - continue
-		//2. - open doc
-		//need one more llop for open the doc after which again logout-doc menu
-
-		//who and when last time change
 	}
 
 	UserManager::Term();

@@ -30,9 +30,24 @@ User::User(std::string login, unsigned int pasword_hash) {
 bool User::ComparePassword(std::string& password) {
 	return m_pasword_hash == Hash(password);
 }
+bool User::CompareLogin(std::string login) {
+	return Hash(m_login) == Hash(login);
+}
+bool User::CompareLogin(unsigned int hash) {
+	return hash == Hash(m_login);
+}
 
-char* User::GetLogin() {
-	return m_login.data();
+bool User::IsAdmin() {
+	return m_isAdmin;
+}
+
+const char* User::GetLogin() {
+	return m_login.c_str();
+}
+
+void User::WriteToStream(std::ofstream& ofs) {
+	auto hash = Hash(m_login);
+	ofs.write((char*)&hash, 4);
 }
 
 
@@ -105,4 +120,13 @@ User* UserManager::GetCurrentUser() {
 }
 void UserManager::Logout() {
 	s_currentUser = nullptr;
+}
+
+User* UserManager::GetUserByLoginHash(unsigned int hash) {
+	for (const auto& [h, pUser] : s_users) {
+		if (pUser->CompareLogin(hash)) {
+			return pUser;
+		}
+	}
+	return nullptr;
 }
