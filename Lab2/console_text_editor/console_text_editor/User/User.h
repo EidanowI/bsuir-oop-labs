@@ -8,7 +8,9 @@ public:
 	User(char* pLogin, unsigned int password_hash);
 	~User();
 
-	bool TryToLogin(std::string password);
+	bool TryToLogin(std::string password) override;
+
+	void ChangePermission(IUser* pUser, bool isAdmin) override;
 
 	char* GetLogin();
 	unsigned int GetPasswordHash();

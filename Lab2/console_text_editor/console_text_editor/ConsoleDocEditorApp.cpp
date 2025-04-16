@@ -19,7 +19,7 @@ void ConsoleDocEditorApp::Run() {
 	while (G_is_editor_rinning) {
 		system("CLS");
 
-		while (true) {
+		while (true) {///Reg-Log menu
 			std::cout << "Q - Quit;\n";
 			std::cout << "R - Register;\n";
 			std::cout << "L - Login;\n";
@@ -85,6 +85,27 @@ void ConsoleDocEditorApp::Run() {
 			std::cout << "Invalid command! Use given comands.\n";
 		}
 
-		std::cin.get();
+		if (!m_pUser) continue;
+
+		system("CLS");
+		while (true) {///Loged menu
+			std::cout << "1. - Logout\n";
+			std::cout << "2. - Change user permissions\n";
+			
+			char in;
+			std::cin >> in;
+
+			if (in == '1') {
+				m_pUser = nullptr;
+
+				break;
+			}
+			else if (in == '2') {
+				m_pUser->ChangePermission(0, 0);
+			}
+			else {
+				std::cout << "Incorrect command!\n";
+			}
+		}
 	}
 }

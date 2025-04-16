@@ -2,6 +2,7 @@
 
 #include "LocalStorageUserRepo.h"
 #include "User.h"
+#include "Admin.h"
 
 
 
@@ -16,13 +17,17 @@ unsigned int Hash(const std::string& a) {
 
 
 LocalStorageUserRepo::LocalStorageUserRepo() {
-
+	char pLogin[64] = "admin";
+	m_reg_pUsers.push_back(new Admin(pLogin, Hash("1111")));
 }
 LocalStorageUserRepo::~LocalStorageUserRepo() {
 	std::ofstream ofs(".users.cfg", std::ios::binary);
 
 	for (auto it = m_reg_pUsers.begin(); it != m_reg_pUsers.end(); ++it) {
 		User* pUser = (User*)*it;
+		if (Hash(pUser->GetLogin()) == Hash("admin")) {
+			continue;
+		}
 
 		ofs.write(pUser->GetLogin(), 64);
 		unsigned int hash = pUser->GetPasswordHash();
@@ -84,10 +89,25 @@ User::~User() {
 bool User::TryToLogin(std::string password) {
 	return m_pasword_hash == Hash(password);
 }
+void User::ChangePermission(IUser* pUser, bool isAdmin) {
+	std::cout << "You dont have permissions!\n";
+}
 
 char* User::GetLogin() {
 	return m_pLogin;
 }
 unsigned int User::GetPasswordHash() {
 	return m_pasword_hash;
+}
+
+
+Admin::Admin(char* pLogin, unsigned int password_hash) : User(pLogin, password_hash){
+
+}
+Admin::~Admin() {
+
+}
+
+void Admin::ChangePermission(IUser* pUser, bool isAdmin) {
+	std::cout << "Yaaa Yaaa";
 }

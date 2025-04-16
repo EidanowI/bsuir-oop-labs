@@ -41,5 +41,8 @@
     <ClInclude Include="User\User.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="User\Admin.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
