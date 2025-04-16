@@ -1,7 +1,8 @@
-#include <iostream>
+#include "ConsoleDocEditorApp.h"
 
 
 
 int main() {
-	std::cout << "Hello world!";
+	ConsoleDocEditorApp app = ConsoleDocEditorApp();
+	app.Run();
 }
