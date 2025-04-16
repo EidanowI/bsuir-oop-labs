@@ -1,14 +1,90 @@
 #include "ConsoleDocEditorApp.h"
+#include "User/LocalStorageUserRepo.h"
 
+
+
+bool G_is_editor_rinning = true;
 
 
 ConsoleDocEditorApp::ConsoleDocEditorApp() {
-
+	m_pUser_repo = new LocalStorageUserRepo();
 }
 ConsoleDocEditorApp::~ConsoleDocEditorApp() {
-
+	if(m_pUser_repo) delete m_pUser_repo;
 }
 
 void ConsoleDocEditorApp::Run() {
+	m_pUser_repo->LoadRegUsers();
 
+	while (G_is_editor_rinning) {
+		system("CLS");
+
+		while (true) {
+			std::cout << "Q - Quit;\n";
+			std::cout << "R - Register;\n";
+			std::cout << "L - Login;\n";
+
+			std::cout << ":";
+			char in;
+			std::cin >> in;
+
+			if (in == 'Q' || in == 'q') {
+				G_is_editor_rinning = false;
+				break;
+			}
+			else if (in == 'R' || in == 'r') {
+				while (true) {
+					std::cout << "Login: ";
+					std::string login;
+					std::cin >> login;
+
+					if (m_pUser_repo->GetUser(login)) {
+						std::cout << "User already axist!\n";
+					}
+					else {
+						std::cout << "Password: ";
+						std::string password;
+						std::cin >> password;
+
+						m_pUser_repo->AddNewUser(login, password);
+
+						break;
+					}
+				}
+				break;
+			}
+			if (in == 'L' || in == 'l') {
+				while (true) {
+					std::cout << "Login: ";
+					std::string login;
+					std::cin >> login;
+
+					auto pUser = m_pUser_repo->GetUser(login);
+					if (pUser) {
+						while (true) {
+							std::cout << "Password: ";
+							std::string password;
+							std::cin >> password;
+
+							if (pUser->TryToLogin(password)) {
+								m_pUser = pUser;
+								break;
+							}
+							else {
+								std::cout << "Incorrect password!\n";
+							}
+						}
+						break;
+					}
+					else {
+						std::cout << "User not axist!\n";
+					}
+				}
+				break;
+			}
+			std::cout << "Invalid command! Use given comands.\n";
+		}
+
+		std::cin.get();
+	}
 }

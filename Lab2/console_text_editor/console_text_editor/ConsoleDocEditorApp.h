@@ -1,4 +1,5 @@
 #pragma once
+#include "User/IUserRepo.h"
 
 
 
@@ -10,5 +11,6 @@ public:
 	void Run();
 
 private:
-
+	IUserRepo* m_pUser_repo = nullptr;
+	IUser* m_pUser = nullptr;
 };

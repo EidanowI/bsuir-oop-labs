@@ -21,9 +21,24 @@
     <ClCompile Include="ConsoleDocEditorApp.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="User\User.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ConsoleDocEditorApp.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="User\IUserRepo.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="User\IUser.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="User\LocalStorageUserRepo.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="User\User.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
