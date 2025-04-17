@@ -88,9 +88,8 @@ void ConsoleDocEditorApp::Run() {
 
 		if (!m_pUser) continue;
 
-		
-		while (true) {///Loged menu
-			system("CLS");
+		system("CLS");
+		while (true) {///Loged menu		
 			std::cout << "You " << "\033[32m" << ((User*)m_pUser)->GetLogin() << "\033[0m" << (((User*)m_pUser)->GetIsCanEdit() ? "(Edit-allowed)" : "(View-only)") << "\n";
 			std::cout << "1. - Logout\n";
 			std::cout << "2. - Change user permissions\n";
@@ -105,7 +104,7 @@ void ConsoleDocEditorApp::Run() {
 			}
 			else if (in == '2') {
 				if (m_pUser != m_pUser_repo->GetUser("admin")) {
-					std::cout << "This user cant change permissions!\n";
+					std::cout << "\033[31mThis user cant change permissions!\033[0m\n";
 					continue;
 				}
 

@@ -106,7 +106,7 @@ User::User(char* pLogin, unsigned int password_hash) : m_pasword_hash(password_h
 	memcpy(m_pLogin, pLogin, 64);
 	m_isCanEdit = true;
 }
-User::User(char* pLogin, unsigned int password_hash, bool perm) {
+User::User(char* pLogin, unsigned int password_hash, bool perm) : m_pasword_hash(password_hash) {
 	memcpy(m_pLogin, pLogin, 64);
 	m_isCanEdit = perm;
 }
