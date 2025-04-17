@@ -24,6 +24,9 @@
     <ClCompile Include="User\User.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Document\Document.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ConsoleDocEditorApp.h">
@@ -45,6 +48,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Document\IPermissionOpener.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Document\EditPermissionOpener.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Document\ViewPermissionOpener.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

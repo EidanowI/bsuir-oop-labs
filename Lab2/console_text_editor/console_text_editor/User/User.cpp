@@ -4,6 +4,9 @@
 #include "User.h"
 #include "Admin.h"
 
+#include "../Document/EditPermissionOpener.h"
+#include "../Document/ViewPermissionOpener.h"
+
 
 
 unsigned int Hash(const std::string& a) {
@@ -102,16 +105,30 @@ void LocalStorageUserRepo::AddNewUser(std::string login, std::string password) {
 }
 
 
-User::User(char* pLogin, unsigned int password_hash) : m_pasword_hash(password_hash){
-	memcpy(m_pLogin, pLogin, 64);
-	m_isCanEdit = true;
-}
+User::User(char* pLogin, unsigned int password_hash) : User(pLogin, password_hash, true) {}
 User::User(char* pLogin, unsigned int password_hash, bool perm) : m_pasword_hash(password_hash) {
 	memcpy(m_pLogin, pLogin, 64);
 	m_isCanEdit = perm;
+
+	if (m_pPermission_opener) {
+		delete m_pPermission_opener;
+		m_pPermission_opener = nullptr;
+	}
+	if (m_isCanEdit) {
+		m_pPermission_opener = new EditPermissionOpener();
+	}
+	else {
+		m_pPermission_opener = new ViewPermissionOpener();
+	}
 }
 User::~User() {
+	if (m_pPermission_opener) {
+		delete m_pPermission_opener;
+	}
+}
 
+void User::OpenDocumentContext(std::string path) {
+	m_pPermission_opener->OpenDocument(path);
 }
 
 bool User::TryToLogin(std::string password) {
@@ -124,6 +141,17 @@ void User::SetPermission(IUser* pUser) {
 	if (Hash(m_pLogin) != Hash(((User*)pUser)->GetLogin())) return;
 
 	m_isCanEdit = (m_isCanEdit ? false : true);
+
+	if (m_pPermission_opener) {
+		delete m_pPermission_opener;
+		m_pPermission_opener = nullptr;
+	}
+	if (m_isCanEdit) {
+		m_pPermission_opener = new EditPermissionOpener();
+	}
+	else {
+		m_pPermission_opener = new ViewPermissionOpener();
+	}
 }
 
 char* User::GetLogin() {

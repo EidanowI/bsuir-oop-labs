@@ -1,5 +1,6 @@
 #pragma once
 #include "IUser.h"
+#include "../Document/IPermissionOpener.h"
 
 
 
@@ -8,6 +9,8 @@ public:
 	User(char* pLogin, unsigned int password_hash);
 	User(char* pLogin, unsigned int password_hash, bool perm);
 	~User();
+
+	void OpenDocumentContext(std::string path) override;
 
 	bool TryToLogin(std::string password) override;
 
@@ -23,4 +26,6 @@ private:
 	char m_pLogin[64]{};
 	unsigned int m_pasword_hash = 0;
 	bool m_isCanEdit = true;
+
+	IPermissionOpener* m_pPermission_opener = nullptr;
 };

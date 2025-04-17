@@ -93,6 +93,7 @@ void ConsoleDocEditorApp::Run() {
 			std::cout << "You " << "\033[32m" << ((User*)m_pUser)->GetLogin() << "\033[0m" << (((User*)m_pUser)->GetIsCanEdit() ? "(Edit-allowed)" : "(View-only)") << "\n";
 			std::cout << "1. - Logout\n";
 			std::cout << "2. - Change user permissions\n";
+			std::cout << "3. - Open document\n";
 			
 			char in;
 			std::cin >> in;
@@ -117,13 +118,21 @@ void ConsoleDocEditorApp::Run() {
 					std::string inp;
 					std::cin >> inp;
 
-					if (inp.size() == 2 && (inp[0] == 'Q' || inp[0] == 'q')) {
+					auto size = inp.size();
+					if (inp.size() == 1 && (inp[0] == 'Q' || inp[0] == 'q')) {
 						break;
 					}
 					auto a = m_pUser_repo->GetUser(inp);
-					m_pUser->ChangePermission(a);
+					if (a != nullptr) {
+						m_pUser->ChangePermission(a);
+					}
 					system("CLS");
 				}
+			}
+			else if (in == '3') {
+				m_pUser->OpenDocumentContext("ff");
+
+				system("CLS");//needed here for beauty
 			}
 			else {
 				std::cout << "Incorrect command!\n";
