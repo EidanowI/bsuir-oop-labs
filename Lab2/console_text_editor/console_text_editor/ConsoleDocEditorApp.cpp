@@ -101,7 +101,27 @@ void ConsoleDocEditorApp::Run() {
 				break;
 			}
 			else if (in == '2') {
-				m_pUser->ChangePermission(0, 0);
+				if (m_pUser != m_pUser_repo->GetUser("admin")) {
+					std::cout << "This user cant change permissions!\n";
+					continue;
+				}
+
+				system("CLS");
+				while (true) {
+					
+					std::cout << "Q - to quit\n";
+					m_pUser_repo->LogAllUsers();
+
+					std::string inp;
+					std::cin >> inp;
+
+					if (inp.size() == 2 || inp[0] == 'Q') {
+						break;
+					}
+					auto a = m_pUser_repo->GetUser(inp);
+					m_pUser->ChangePermission(a);
+					system("CLS");
+				}
 			}
 			else {
 				std::cout << "Incorrect command!\n";

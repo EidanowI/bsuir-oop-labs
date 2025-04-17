@@ -9,5 +9,7 @@ public:
 
 	virtual bool TryToLogin(std::string password) = 0;
 
-	virtual void ChangePermission(IUser* pUser, bool isAdmin) = 0;
+	virtual void ChangePermission(IUser* pUser) = 0;
+
+	virtual void SetPermission(IUser* pUser) = 0;
 };
