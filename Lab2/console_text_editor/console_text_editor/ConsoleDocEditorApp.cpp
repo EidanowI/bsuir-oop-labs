@@ -1,5 +1,6 @@
 #include "ConsoleDocEditorApp.h"
 #include "User/LocalStorageUserRepo.h"
+#include "User/User.h"
 
 
 
@@ -87,8 +88,10 @@ void ConsoleDocEditorApp::Run() {
 
 		if (!m_pUser) continue;
 
-		system("CLS");
+		
 		while (true) {///Loged menu
+			system("CLS");
+			std::cout << "You " << "\033[32m" << ((User*)m_pUser)->GetLogin() << "\033[0m" << (((User*)m_pUser)->GetIsCanEdit() ? "(Edit-allowed)" : "(View-only)") << "\n";
 			std::cout << "1. - Logout\n";
 			std::cout << "2. - Change user permissions\n";
 			
@@ -106,16 +109,16 @@ void ConsoleDocEditorApp::Run() {
 					continue;
 				}
 
-				system("CLS");
 				while (true) {
-					
+
+
 					std::cout << "Q - to quit\n";
 					m_pUser_repo->LogAllUsers();
 
 					std::string inp;
 					std::cin >> inp;
 
-					if (inp.size() == 2 || inp[0] == 'Q') {
+					if (inp.size() == 2 && (inp[0] == 'Q' || inp[0] == 'q')) {
 						break;
 					}
 					auto a = m_pUser_repo->GetUser(inp);

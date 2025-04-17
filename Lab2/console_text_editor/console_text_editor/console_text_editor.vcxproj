@@ -133,6 +133,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ConsoleDocEditorApp.h" />
+    <ClInclude Include="Document\IPermissionOpener.h" />
     <ClInclude Include="User\Admin.h" />
     <ClInclude Include="User\IUser.h" />
     <ClInclude Include="User\IUserRepo.h" />
