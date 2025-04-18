@@ -110,7 +110,7 @@ void ConsoleDocEditorApp::Run() {
 				}
 
 				while (true) {
-
+					system("CLS");
 
 					std::cout << "Q - to quit\n";
 					m_pUser_repo->LogAllUsers();
@@ -120,13 +120,14 @@ void ConsoleDocEditorApp::Run() {
 
 					auto size = inp.size();
 					if (inp.size() == 1 && (inp[0] == 'Q' || inp[0] == 'q')) {
+						system("CLS");
 						break;
 					}
 					auto a = m_pUser_repo->GetUser(inp);
 					if (a != nullptr) {
+						system("CLS");
 						m_pUser->ChangePermission(a);
 					}
-					system("CLS");
 				}
 			}
 			else if (in == '3') {
