@@ -10,7 +10,7 @@ public:
 	User(char* pLogin, unsigned int password_hash, bool perm);
 	~User();
 
-	void OpenDocumentContext(std::string path) override;
+	void OpenDocumentContext(std::string path, char* opener) override;
 
 	bool TryToLogin(std::string password) override;
 

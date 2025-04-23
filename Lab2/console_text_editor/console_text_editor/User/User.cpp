@@ -127,8 +127,8 @@ User::~User() {
 	}
 }
 
-void User::OpenDocumentContext(std::string path) {
-	m_pPermission_opener->OpenDocument(path);
+void User::OpenDocumentContext(std::string path, char* opener) {
+	m_pPermission_opener->OpenDocumentContext(path, opener);
 }
 
 bool User::TryToLogin(std::string password) {

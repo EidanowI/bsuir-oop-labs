@@ -1,3 +1,5 @@
+#include <filesystem>
+
 #include "ConsoleDocEditorApp.h"
 #include "User/LocalStorageUserRepo.h"
 #include "User/User.h"
@@ -131,9 +133,13 @@ void ConsoleDocEditorApp::Run() {
 				}
 			}
 			else if (in == '3') {
-				m_pUser->OpenDocumentContext("ff");
+				std::cout << "Document name: ";
+				std::string file_name;
+				std::cin >> file_name;
 
-				system("CLS");//needed here for beauty
+				m_pUser->OpenDocumentContext("Docs/" + file_name, ((User*)m_pUser)->GetLogin());
+
+				//system("CLS");//needed here for beauty
 			}
 			else {
 				std::cout << "Incorrect command!\n";

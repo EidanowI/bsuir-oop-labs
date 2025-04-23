@@ -56,5 +56,11 @@
     <ClInclude Include="Document\ViewPermissionOpener.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Document\Document.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Document\Content.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

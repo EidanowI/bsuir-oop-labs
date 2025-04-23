@@ -8,5 +8,5 @@ public:
 	ViewPermissionOpener();
 	~ViewPermissionOpener();
 
-	void OpenDocument(std::string path) override;
+	void OpenDocumentContext(std::string path, char* opener) override;
 };

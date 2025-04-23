@@ -7,5 +7,5 @@ class IPermissionOpener {
 public:
 	virtual ~IPermissionOpener(){}
 
-	virtual void OpenDocument(std::string path) = 0;
+	virtual void OpenDocumentContext(std::string path, char* opener) = 0;
 };
