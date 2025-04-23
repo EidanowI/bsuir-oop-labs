@@ -1,4 +1,5 @@
 #pragma once
+#include <iostream>
 
 
 
@@ -40,6 +41,9 @@ public:
 			}*/
 			if (m_data[i] == 0) {
 				std::cout << ' ';
+			}
+			else if (m_data[i] == '\r') {
+
 			}
 			else {
 				std::cout << m_data[i];

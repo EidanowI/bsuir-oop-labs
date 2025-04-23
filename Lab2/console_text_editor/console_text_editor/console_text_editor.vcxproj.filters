@@ -27,6 +27,9 @@
     <ClCompile Include="Document\Document.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Document\Import\Import.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ConsoleDocEditorApp.h">
@@ -60,6 +63,15 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Document\Content.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Document\Import\IContentImporter.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Document\Import\TXTImporterAdapter.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Document\Import\TXTImporter.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

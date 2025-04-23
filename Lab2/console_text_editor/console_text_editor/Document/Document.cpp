@@ -7,6 +7,8 @@
 #include "ViewPermissionOpener.h"
 #include "Document.h"
 
+#include "Import/TXTImporterAdapter.h"
+
 
 
 EditPermissionOpener::EditPermissionOpener() {
@@ -101,7 +103,16 @@ Document::~Document() {
 
 void Document::Open(std::string name) {
 	if (std::filesystem::exists(name)) {
+		std::vector<Line> imported_lines;
 
+		if (name[name.size() - 1] == 't') {
+			auto pImporter = new TXTImporterAdapter();
+			imported_lines = pImporter->Import(m_author, m_edit_date, name);
+		}
+
+		for (int i = 0; i < imported_lines.size(); i++) {
+			m_content.AddLine(imported_lines[i]);
+		}
 	}
 	else {
 		char a[] = "Hello wordls!";
