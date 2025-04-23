@@ -92,7 +92,7 @@ void ViewPermissionOpener::OpenDocumentContext(std::string path, char* opener) {
 }
 
 
-Document::Document(bool is_editable, char* opener) : m_isEditable(is_editable), m_opener(opener){
+Document::Document(bool is_editable, char* opener) : m_isEditable(is_editable), m_opener(opener), m_content(m_isEditable){
 	//m_isDocument_content_changed = false;
 }
 Document::~Document() {
@@ -100,13 +100,19 @@ Document::~Document() {
 }
 
 void Document::Open(std::string name) {
-	std::cout << "OPEN";
+	if (std::filesystem::exists(name)) {
+
+	}
+	else {
+		char a[] = "Hello wordls!";
+		m_content.AddLine(Line(a));
+	}
 }
 void Document::Save() {
 	std::cout << "SAVE";
 }
 void Document::Edit() {
-	bool is_should = m_content.Edit(m_isEditable);
+	bool is_should = m_content.Edit();
 
 	if (is_should) {
 		m_author = m_opener;
