@@ -74,5 +74,14 @@
     <ClInclude Include="Document\Import\TXTImporter.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Document\Command\ICommand.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Document\Command\AddCharCommand.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Document\Command\DeleteCommand.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

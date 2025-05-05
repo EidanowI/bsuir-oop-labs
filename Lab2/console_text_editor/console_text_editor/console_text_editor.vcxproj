@@ -137,6 +137,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ConsoleDocEditorApp.h" />
+    <ClInclude Include="Document\Command\AddCharCommand.h" />
+    <ClInclude Include="Document\Command\DeleteCommand.h" />
+    <ClInclude Include="Document\Command\ICommand.h" />
     <ClInclude Include="Document\Content.h" />
     <ClInclude Include="Document\Document.h" />
     <ClInclude Include="Document\EditPermissionOpener.h" />

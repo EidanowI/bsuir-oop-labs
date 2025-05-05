@@ -1,6 +1,6 @@
 #pragma once
 #include <iostream>
-
+#include "Command/ICommand.h"
 
 
 struct Vec2 {
@@ -16,95 +16,100 @@ struct Vec2 {
 
 class Line {
 public:
-	Line(char* data) {
-		for (int i = 0; i < 140; i++) {
-			if (data[i]) {
-				m_data[i] = data[i];
-			}
-			else {
-				break;
-			}
+	Line(){}
+	Line(char* data);
+
+	void Print();
+
+	void SetLineNumber(int line_number);
+
+	void AddChar(char ch, int x) {
+		if (m_data[139]) return;
+
+		for (int i = 139; i >= x; i--) {
+			m_data[i] = m_data[i - 1];
 		}
+
+		m_data[x] = ch;
+
+		Print();
 	}
 
-	void Print() {
-		std::cout << "\033[" + std::to_string(m_line_number + 1) + ";1H";
-
-		for (int i = 0; i < 140; i++) {
-			/*if (m_highlight_begin != m_highlight_end) {
-				if (m_highlight_begin == i) {
-					std::cout << "\033[3;100;30m";
-				}
-				if (m_highlight_end == i) {
-					std::cout << "\033[0m";
-				}
-			}*/
-			if (m_data[i] == 0) {
-				std::cout << ' ';
-			}
-			else if (m_data[i] == '\r') {
-
-			}
-			else {
-				std::cout << m_data[i];
-			}
+	void DelChar(int x) {
+		for (int i = x; i < 138; i++) {
+			m_data[i] = m_data[i + 1];
 		}
+
+		Print();
 	}
 
-	void SetLineNumber(int line_number) {
-		m_line_number = line_number;
-	}
-
-private:
+public:
 	int m_line_number;
 
 	char m_data[140]{};
 };
 
 
+class HistoryCommand {
+public:
+	HistoryCommand() {
+		top = -1;
+	}
+
+	void AddCommand(ICommand* command) {
+		/*while (m_commands.size() - 1 != top && !m_commands.empty()) {
+			m_commands.pop_back();
+		}*/
+
+		m_commands.push_back(command);
+		top = m_commands.size()-1;
+	}
+
+	ICommand* GetCommand() {
+		auto ret = m_commands[top];
+
+		if (top != 0) {
+			top--;
+		}
+		return ret;
+	}
+
+private:
+	int top = 0;
+	std::vector<ICommand*> m_commands;
+};
+
 class Content {
 public:
-	Content(bool is_editable) : m_editable(is_editable){
-		m_isInsert_mode = false;
+	Content(bool is_editable);
+	~Content();
 
-		m_carriage_pos = Vec2(0, 0);
-	}
-	~Content() {
+	bool Edit();///return true if user change content
 
-	}
+	void ReprintAllLines();
 
-	bool Edit() {///return true if user change content
-		system("CLS");
+	void SetCarrige(Vec2 pos);
+	void SetCarrigeToOrigin();
 
-		ReprintAllLines();
+	bool IsInserMode();
 
-		while (true);
+	void AddLine(Line line);
 
-		return true;
-	}
+	void MoveCursorLeft() {
+		//ClearHighlg();
 
-	void ReprintAllLines() {
-		for (int i = 0; i < m_lines.size(); i++) {
-			m_lines[i].Print();
+		if (m_carriage_pos.x > 0) {
+			m_carriage_pos.x--;
 		}
-
-		SetCarrige(m_carriage_pos);
+		SetCarrigeToOrigin();
 	}
+	void MoveCursorRight() {
+		//ClearHighlg();
 
-	void SetCarrige(Vec2 pos) {
-		std::cout << "\033[" + std::to_string(pos.y + 1) + ";" + std::to_string(pos.x + 1) + "H";
-	}
-	void SetCarrigeToOrigin() {
-		std::cout << "\033[" + std::to_string(m_carriage_pos.y + 1) + ";" + std::to_string(m_carriage_pos.x + 1) + "H";
-	}
-
-	bool IsInserMode() {
-		return m_isInsert_mode;
-	}
-
-	void AddLine(Line line) {
-		line.SetLineNumber(m_lines.size());
-		m_lines.push_back(line);
+		if (m_carriage_pos.x < 139) {
+			m_carriage_pos.x++;
+		}
+		SetCarrigeToOrigin();
 	}
 
 private:
@@ -115,4 +120,6 @@ private:
 	std::vector<Line> m_lines;
 
 	Vec2 m_carriage_pos;
+
+	HistoryCommand m_history_commands;
 };
