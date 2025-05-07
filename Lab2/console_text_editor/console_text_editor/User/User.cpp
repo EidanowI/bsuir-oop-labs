@@ -27,15 +27,13 @@ LocalStorageUserRepo::~LocalStorageUserRepo() {
 
 	for (auto it = m_reg_pUsers.begin(); it != m_reg_pUsers.end(); ++it) {
 		User* pUser = (User*)*it;
-		if (Hash(pUser->GetLogin()) == Hash("admin")) {
+		if (pUser->IsAdmin()) {
 			continue;
 		}
 
 		ofs.write(pUser->GetLogin(), 64);
 		unsigned int hash = pUser->GetPasswordHash();
 		ofs.write((char*)&hash, 4);
-		bool is_edit_al = pUser->GetIsCanEdit();
-		ofs.write((char*)&is_edit_al, 1);
 
 		delete pUser;
 	}
@@ -44,8 +42,7 @@ LocalStorageUserRepo::~LocalStorageUserRepo() {
 }
 
 void LocalStorageUserRepo::LoadRegUsers() {
-	char pLogin[64] = "admin";
-	Admin* pAdmin_user = new Admin(pLogin, Hash("1111"));
+	Admin* pAdmin_user = new Admin();
 	m_reg_pUsers.push_back(pAdmin_user);
 
 	std::ifstream ifs(".users.cfg", std::ios::binary | std::ios::ate);
@@ -53,19 +50,15 @@ void LocalStorageUserRepo::LoadRegUsers() {
 		int file_size = ifs.tellg();
 		ifs.seekg(0);
 
-		for (int i = 0; i < file_size / 69; i++) {
+		for (int i = 0; i < file_size / 68; i++) {
 			char login[64]{};
 			unsigned int password_hash;
-			bool is_edit_al;
 
 			ifs.read(login, 64);
 			ifs.read((char*)&password_hash, 4);
-			ifs.read((char*)&is_edit_al, 1);
 
-			auto pUser = new User(login, password_hash, is_edit_al);
+			auto pUser = new User(login, password_hash);
 			m_reg_pUsers.push_back(pUser);
-
-			pAdmin_user->AddAdministretedUser(pUser);
 		}
 	}
 	ifs.close();
@@ -84,74 +77,27 @@ IUser* LocalStorageUserRepo::GetUser(std::string login) {
 
 	return nullptr;
 }
-void LocalStorageUserRepo::LogAllUsers() {
-	for (auto it = m_reg_pUsers.begin(); it != m_reg_pUsers.end(); ++it) {
-		User* pUser = (User*)*it;
 
-		if (pUser == GetUser("admin")) continue;
-
-		std::cout << (pUser->GetIsCanEdit() ? "\033[32m" : "\033[31m") << pUser->GetLogin() << "\033[0m\n";
-	}
-}
 void LocalStorageUserRepo::AddNewUser(std::string login, std::string password) {
 	char pLogin[64]{};
 	memcpy(pLogin, login.c_str(), login.size());
 
 	auto new_user = new User(pLogin, Hash(password));
 	m_reg_pUsers.push_back(new_user);
-
-	Admin* admin = (Admin*)GetUser("admin");
-	admin->AddAdministretedUser(new_user);
 }
 
 
-User::User(char* pLogin, unsigned int password_hash) : User(pLogin, password_hash, true) {}
-User::User(char* pLogin, unsigned int password_hash, bool perm) : m_pasword_hash(password_hash) {
+User::User(const char* pLogin, unsigned int password_hash) : m_pasword_hash(password_hash) {
 	memcpy(m_pLogin, pLogin, 64);
-	m_isCanEdit = perm;
-
-	if (m_pPermission_opener) {
-		delete m_pPermission_opener;
-		m_pPermission_opener = nullptr;
-	}
-	if (m_isCanEdit) {
-		m_pPermission_opener = new EditPermissionOpener();
-	}
-	else {
-		m_pPermission_opener = new ViewPermissionOpener();
-	}
 }
 User::~User() {
-	if (m_pPermission_opener) {
-		delete m_pPermission_opener;
-	}
 }
 
-void User::OpenDocumentContext(std::string path, char* opener) {
-	m_pPermission_opener->OpenDocumentContext(path, opener);
+bool User::IsAdmin() {
+	return Hash("admin") == Hash(m_pLogin);
 }
-
 bool User::TryToLogin(std::string password) {
 	return m_pasword_hash == Hash(password);
-}
-void User::ChangePermission(IUser* pUser) {
-	std::cout << "You cant change permissions\n";
-}
-void User::SetPermission(IUser* pUser) {
-	if (Hash(m_pLogin) != Hash(((User*)pUser)->GetLogin())) return;
-
-	m_isCanEdit = (m_isCanEdit ? false : true);
-
-	if (m_pPermission_opener) {
-		delete m_pPermission_opener;
-		m_pPermission_opener = nullptr;
-	}
-	if (m_isCanEdit) {
-		m_pPermission_opener = new EditPermissionOpener();
-	}
-	else {
-		m_pPermission_opener = new ViewPermissionOpener();
-	}
 }
 
 char* User::GetLogin() {
@@ -160,24 +106,11 @@ char* User::GetLogin() {
 unsigned int User::GetPasswordHash() {
 	return m_pasword_hash;
 }
-bool User::GetIsCanEdit() {
-	return m_isCanEdit;
-}
 
 
-Admin::Admin(char* pLogin, unsigned int password_hash) : User(pLogin, password_hash){
+Admin::Admin() : User("admin", Hash("1111")) {
 
 }
 Admin::~Admin() {
 
-}
-
-void Admin::ChangePermission(IUser* pUser) {
-	for (auto it = m_administreted_pUsers.begin(); it != m_administreted_pUsers.end(); ++it) {
-		((IUser*)*it)->SetPermission(pUser);
-	}
-}
-
-void Admin::AddAdministretedUser(IUser* pUser) {
-	m_administreted_pUsers.push_back(pUser);
 }

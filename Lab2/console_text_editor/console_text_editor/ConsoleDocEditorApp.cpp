@@ -3,6 +3,7 @@
 #include "ConsoleDocEditorApp.h"
 #include "User/LocalStorageUserRepo.h"
 #include "User/User.h"
+#include "File/FileDialog.h"
 
 
 
@@ -91,8 +92,34 @@ void ConsoleDocEditorApp::Run() {
 		if (!m_pUser) continue;
 
 		system("CLS");
-		while (true) {///Loged menu		
-			std::cout << "You " << "\033[32m" << ((User*)m_pUser)->GetLogin() << "\033[0m" << (((User*)m_pUser)->GetIsCanEdit() ? "(Edit-allowed)" : "(View-only)") << "\n";
+
+		while (true) {///Open new or exist document
+			std::cout << "You " << "\033[32m" << ((User*)m_pUser)->GetLogin() << "\033[0m\n";
+			std::cout << "1. - New document\n";
+			std::cout << "2. - Open document\n";
+
+			char in;
+			std::cin >> in;
+
+			if (in == '1') {
+				//m_pDocument = new Document(m_pUser);
+
+				break;///give user inside new doc() and new doc().isEditable();
+			}
+			else if (in = '2') {
+				auto path = FileDialog::FileDialogLoad("Open file");
+
+				//m_pDocument = new Document(path, m_pUser);
+
+				break;
+			}
+			else {
+				std::cout << "Incorrect command!\n";
+			}
+		}
+
+		/*while (m_pDocument) {///Loged menu		
+			
 			std::cout << "1. - Logout\n";
 			std::cout << "2. - Change user permissions\n";
 			std::cout << "3. - Open document\n";
@@ -144,6 +171,6 @@ void ConsoleDocEditorApp::Run() {
 			else {
 				std::cout << "Incorrect command!\n";
 			}
-		}
+		}*/
 	}
 }

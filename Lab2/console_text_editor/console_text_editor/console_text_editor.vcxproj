@@ -132,6 +132,7 @@
     <ClCompile Include="ConsoleDocEditorApp.cpp" />
     <ClCompile Include="Document\Document.cpp" />
     <ClCompile Include="Document\Import\Import.cpp" />
+    <ClCompile Include="File\FileDialog.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="User\User.cpp" />
   </ItemGroup>
@@ -148,6 +149,7 @@
     <ClInclude Include="Document\Import\TXTImporterAdapter.h" />
     <ClInclude Include="Document\IPermissionOpener.h" />
     <ClInclude Include="Document\ViewPermissionOpener.h" />
+    <ClInclude Include="File\FileDialog.h" />
     <ClInclude Include="User\Admin.h" />
     <ClInclude Include="User\IUser.h" />
     <ClInclude Include="User\IUserRepo.h" />

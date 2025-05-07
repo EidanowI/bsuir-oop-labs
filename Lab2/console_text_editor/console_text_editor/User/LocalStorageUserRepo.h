@@ -13,7 +13,6 @@ public:
 	void LoadRegUsers() override;
 
 	IUser* GetUser(std::string login) override;
-	void LogAllUsers() override;
 	void AddNewUser(std::string login, std::string password) override;
 
 private:
