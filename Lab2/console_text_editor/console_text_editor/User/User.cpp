@@ -4,9 +4,6 @@
 #include "User.h"
 #include "Admin.h"
 
-#include "../Document/EditPermissionOpener.h"
-#include "../Document/ViewPermissionOpener.h"
-
 
 
 unsigned int Hash(const std::string& a) {
@@ -86,6 +83,10 @@ void LocalStorageUserRepo::AddNewUser(std::string login, std::string password) {
 	m_reg_pUsers.push_back(new_user);
 }
 
+std::list<IUser*>& LocalStorageUserRepo::GetAllUsers() noexcept {
+	return m_reg_pUsers;
+}
+
 
 User::User(const char* pLogin, unsigned int password_hash) : m_pasword_hash(password_hash) {
 	memcpy(m_pLogin, pLogin, 64);
@@ -103,8 +104,14 @@ bool User::TryToLogin(std::string password) {
 char* User::GetLogin() {
 	return m_pLogin;
 }
+unsigned int User::GetLoginHash() {
+	return Hash(m_pLogin);
+}
 unsigned int User::GetPasswordHash() {
 	return m_pasword_hash;
+}
+bool User::CompareToByLogin(User* pOtherUser) {
+	return Hash(m_pLogin) == Hash(pOtherUser->GetLogin());
 }
 
 

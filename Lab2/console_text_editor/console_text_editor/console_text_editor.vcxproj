@@ -143,13 +143,11 @@
     <ClInclude Include="Document\Command\ICommand.h" />
     <ClInclude Include="Document\Content.h" />
     <ClInclude Include="Document\Document.h" />
-    <ClInclude Include="Document\EditPermissionOpener.h" />
     <ClInclude Include="Document\Import\IContentImporter.h" />
     <ClInclude Include="Document\Import\TXTImporter.h" />
     <ClInclude Include="Document\Import\TXTImporterAdapter.h" />
-    <ClInclude Include="Document\IPermissionOpener.h" />
-    <ClInclude Include="Document\ViewPermissionOpener.h" />
     <ClInclude Include="File\FileDialog.h" />
+    <ClInclude Include="Saver\ISaverStrategy.h" />
     <ClInclude Include="User\Admin.h" />
     <ClInclude Include="User\IUser.h" />
     <ClInclude Include="User\IUserRepo.h" />

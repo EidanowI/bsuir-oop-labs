@@ -94,7 +94,7 @@ void ConsoleDocEditorApp::Run() {
 		system("CLS");
 
 		while (true) {///Open new or exist document
-			std::cout << "You " << "\033[32m" << ((User*)m_pUser)->GetLogin() << "\033[0m\n";
+			std::cout << "You " << "\033[33m" << ((User*)m_pUser)->GetLogin() << "\033[0m\n";
 			std::cout << "1. - New document\n";
 			std::cout << "2. - Open document\n";
 
@@ -102,14 +102,14 @@ void ConsoleDocEditorApp::Run() {
 			std::cin >> in;
 
 			if (in == '1') {
-				//m_pDocument = new Document(m_pUser);
+				m_pDocument = new Document((LocalStorageUserRepo*)m_pUser_repo, (User*)m_pUser);
 
 				break;///give user inside new doc() and new doc().isEditable();
 			}
-			else if (in = '2') {
+			else if (in == '2') {
 				auto path = FileDialog::FileDialogLoad("Open file");
 
-				//m_pDocument = new Document(path, m_pUser);
+				m_pDocument = new Document((LocalStorageUserRepo*)m_pUser_repo, (User*)m_pUser, path);
 
 				break;
 			}
@@ -118,6 +118,55 @@ void ConsoleDocEditorApp::Run() {
 			}
 		}
 
+		while (true) {
+			std::cout << "You are " << "\033[33m" << ((User*)m_pUser)->GetLogin() << "\033[0m";
+			if (m_pDocument->GetIsEditable()) std::cout << "(editor)\n";
+			else std::cout << "(viewer-only)\n";
+
+			std::cout << "Q. - To menu\n";
+			if(m_pUser->IsAdmin()) std::cout << "C. - Change permissions\n";
+			std::cout << "I. - Import from file\n";
+			std::cout << "S. - Saving .lab2 document\n";
+			std::cout << "E. - Export to file\n";
+			std::cout << "D - Edit document\n";	
+
+
+			char in;
+			std::cin >> in;
+
+			if (in == 'Q') {
+				break;
+			}
+			else if (in == 'C' && m_pUser->IsAdmin()) {///change permissions
+				system("CLS");
+				m_pDocument->PrintAllUsers((LocalStorageUserRepo*)m_pUser_repo);
+				std::string in_login;
+				std::cin >> in_login;
+
+				auto a = m_pUser_repo->GetUser(in_login);
+				if (a) {
+					m_pDocument->ChangePermissionForUser((LocalStorageUserRepo*)m_pUser_repo, (User*)a);
+				}
+			}
+			else if (in == 'I') {///import from file
+
+			}
+			else if (in == 'S') {///saving .lab2 document
+
+			}
+			else if (in == 'E') {///export to file
+
+			}
+			else if (in == 'D') {///edit document
+
+			}
+			else {
+				std::cout << "Incorrect input!\n";
+			}
+		}
+
+		delete m_pDocument;
+		m_pDocument = nullptr;
 		/*while (m_pDocument) {///Loged menu		
 			
 			std::cout << "1. - Logout\n";

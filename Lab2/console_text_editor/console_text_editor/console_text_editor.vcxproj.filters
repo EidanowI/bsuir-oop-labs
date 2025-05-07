@@ -53,15 +53,6 @@
     <ClInclude Include="User\Admin.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Document\IPermissionOpener.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Document\EditPermissionOpener.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Document\ViewPermissionOpener.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Document\Document.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -87,6 +78,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="File\FileDialog.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Saver\ISaverStrategy.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

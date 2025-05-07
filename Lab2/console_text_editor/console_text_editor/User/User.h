@@ -1,6 +1,5 @@
 #pragma once
 #include "IUser.h"
-#include "../Document/IPermissionOpener.h"
 
 
 
@@ -15,7 +14,10 @@ public:
 
 
 	char* GetLogin();
+	unsigned int GetLoginHash();
 	unsigned int GetPasswordHash();
+
+	bool CompareToByLogin(User* pOtherUser);
 
 private:
 	char m_pLogin[64]{};

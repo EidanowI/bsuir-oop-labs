@@ -15,6 +15,9 @@ public:
 	IUser* GetUser(std::string login) override;
 	void AddNewUser(std::string login, std::string password) override;
 
+	std::list<IUser*>& GetAllUsers() noexcept;
+
+
 private:
 	std::list<IUser*> m_reg_pUsers;
 };
