@@ -2,11 +2,11 @@
 #include <vector>
 
 #include "ICommand.h"
-#include "../Content.h"
+//#include "../Content.h"
 
 
 
-class AddCharCommand : public ICommand {
+/*class AddCharCommand : public ICommand {
 public:
 	AddCharCommand(std::vector<Line> lines) {
 		m_state_lines = lines;
@@ -24,4 +24,4 @@ public:
 	}
 private:
 	std::vector<Line> m_state_lines;
-};
+};*/

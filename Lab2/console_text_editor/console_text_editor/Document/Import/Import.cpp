@@ -1,4 +1,4 @@
-#include "TXTImporterAdapter.h"
+/*#include "TXTImporterAdapter.h"
 #include "TXTImporter.h"
 
 #include <fstream>
@@ -84,4 +84,4 @@ std::vector<Line> TXTImporter::ImportFromTxt(std::string& author, std::string& d
 	delete buff;
 
 	return ret;
-}
+}*/

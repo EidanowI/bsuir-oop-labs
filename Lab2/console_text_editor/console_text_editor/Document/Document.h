@@ -1,11 +1,12 @@
 #pragma once
 #include <string>
+#include <vector>
 
 #include "../User/User.h"
 #include "../User/LocalStorageUserRepo.h"
-#include "Content.h"
 #include "../Saver/ISaverStrategy.h"
 
+#include "Content/Content.h"
 
 
 
@@ -29,18 +30,14 @@ public:
 	bool GetIsEditable() {
 		return m_isEditable;
 	}
+
+	void Edit(User* pUser);
+
 private:
 	bool m_isEditable = false;
 
 	std::vector<EditPermisionLayer> m_permisionLayers;
 
-	//bool m_isEditable = false;///TODO if opener viewer then we do not save author
-
-	//bool m_isDocument_content_changed = false;
-	//std::string m_opener;
-
-	//std::string m_author;
-	//std::string m_edit_date;
-
-	//Content m_content;
+	bool m_isEdited = false;
+	Content m_content;
 };

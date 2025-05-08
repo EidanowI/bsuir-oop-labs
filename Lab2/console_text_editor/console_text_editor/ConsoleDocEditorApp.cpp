@@ -125,6 +125,7 @@ void ConsoleDocEditorApp::Run() {
 
 			std::cout << "Q. - To menu\n";
 			if(m_pUser->IsAdmin()) std::cout << "C. - Change permissions\n";
+			std::cout << "L. - To show editors and their dates\n";
 			std::cout << "I. - Import from file\n";
 			std::cout << "S. - Saving .lab2 document\n";
 			std::cout << "E. - Export to file\n";
@@ -148,6 +149,10 @@ void ConsoleDocEditorApp::Run() {
 					m_pDocument->ChangePermissionForUser((LocalStorageUserRepo*)m_pUser_repo, (User*)a);
 				}
 			}
+			else if (in == 'L') {///import from file
+				system("CLS");
+				m_pDocument->PrintAllUsers((LocalStorageUserRepo*)m_pUser_repo);
+			}
 			else if (in == 'I') {///import from file
 
 			}
@@ -158,7 +163,7 @@ void ConsoleDocEditorApp::Run() {
 
 			}
 			else if (in == 'D') {///edit document
-
+				m_pDocument->Edit((User*)m_pUser);
 			}
 			else {
 				std::cout << "Incorrect input!\n";

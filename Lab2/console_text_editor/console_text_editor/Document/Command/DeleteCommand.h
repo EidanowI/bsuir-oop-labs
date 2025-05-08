@@ -2,11 +2,11 @@
 #include <vector>
 
 #include "ICommand.h"
-#include "../Content.h"
+//#include "../Content.h"
 
 
 
-class DeleteCommand : public ICommand {
+/*class DeleteCommand : public ICommand {
 public:
 	DeleteCommand(std::vector<Line> lines) {
 		m_state_lines = lines;
@@ -27,4 +27,4 @@ public:
 	}
 private:
 	std::vector<Line> m_state_lines;
-};
+};*/

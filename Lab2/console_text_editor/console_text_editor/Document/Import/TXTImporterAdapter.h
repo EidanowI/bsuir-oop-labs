@@ -9,7 +9,7 @@ public:
 	TXTImporterAdapter();
 	~TXTImporterAdapter();
 
-	std::vector<Line> Import(std::string& author, std::string& date, std::string path) override;
+	//std::vector<Line> Import(std::string& author, std::string& date, std::string path) override;
 
 private:
 	TXTImporter* m_importer;
