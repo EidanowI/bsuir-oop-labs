@@ -3,6 +3,7 @@
 #include <iostream>
 #include <Windows.h>
 #include "../HistoryManager.h"
+#include "Decorator/Decorator.h"
 
 
 
@@ -57,4 +58,6 @@ private:
 	HestoryManager m_history_manager;
 
 	Highlight m_textSelection_highlight;
+
+	IFormator* m_pFormator;
 };

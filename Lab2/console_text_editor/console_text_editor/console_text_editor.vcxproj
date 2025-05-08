@@ -146,6 +146,7 @@
     <ClInclude Include="Document\Command\ICommand.h" />
     <ClInclude Include="Document\Command\PasteCommand.h" />
     <ClInclude Include="Document\Content\Content.h" />
+    <ClInclude Include="Document\Content\Decorator\Decorator.h" />
     <ClInclude Include="Document\Document.h" />
     <ClInclude Include="Document\Export\Exporters.h" />
     <ClInclude Include="Document\Export\IExporter.h" />

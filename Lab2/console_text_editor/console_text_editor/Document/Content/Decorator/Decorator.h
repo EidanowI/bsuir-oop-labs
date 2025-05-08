@@ -55,10 +55,10 @@ public:
 
 	void CharDecorate(int cursor_pos) override {
 		if (m_begin == cursor_pos) {
-			std::cout << '**';
+			std::cout << "**";
 		}
 		if (m_end == cursor_pos) {
-			std::cout << '**';
+			std::cout << "**";
 		}
 
 		return BaseFormator::CharDecorate(cursor_pos);
@@ -82,10 +82,10 @@ public:
 
 	void CharDecorate(int cursor_pos) override {
 		if (m_begin == cursor_pos) {
-			std::cout << '*';
+			std::cout << "*";
 		}
 		if (m_end == cursor_pos) {
-			std::cout << '*';
+			std::cout << "*";
 		}
 
 		return BaseFormator::CharDecorate(cursor_pos);
@@ -109,10 +109,10 @@ public:
 
 	void CharDecorate(int cursor_pos) override {
 		if (m_begin == cursor_pos) {
-			std::cout << '_';
+			std::cout << "_";
 		}
 		if (m_end == cursor_pos) {
-			std::cout << '_';
+			std::cout << "_";
 		}
 
 		return BaseFormator::CharDecorate(cursor_pos);

@@ -19,11 +19,13 @@ Content::Content(bool isEditable, std::vector<char> data) : m_isEditable(isEdita
     cursor_pos = m_data.size();
 }
 Content::~Content() {
-
+    delete m_pFormator;
 }
 
 /*Thats shit will return true if the content was changed so we need to record date*/
 bool Content::Edit() {
+    m_pFormator = new UnderlineFormater(2, 4, new BoldFormater(5, 8, new Formator()));
+
     bool ret = false;
 
     Print();
@@ -162,6 +164,7 @@ void Content::Print(){
                 std::cout << "\033[0m";
             }
         }
+        m_pFormator->CharDecorate(i);
         std::cout << m_data[i];
     }
 
@@ -176,6 +179,7 @@ void Content::Print(){
                 std::cout << "\033[0m";
             }
         }
+        m_pFormator->CharDecorate(i);
         std::cout << m_data[i];
     }
 
