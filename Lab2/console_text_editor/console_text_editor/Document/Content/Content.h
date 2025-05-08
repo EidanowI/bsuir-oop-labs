@@ -21,8 +21,14 @@ public:
 		return m_data;
 	}
 
+	void AddChar(char ch);
+	void DeleteChar();
+
 private:
 	void Print();
+
+	void MoveCursorLeft();
+	void MoveCursorRight();
 
 private:
 	bool m_isEditable = false;

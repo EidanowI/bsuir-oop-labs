@@ -119,7 +119,6 @@ void ConsoleDocEditorApp::Run() {
 		}
 
 		while (true) {
-			system("CLS");
 			std::cout << "You are " << "\033[33m" << ((User*)m_pUser)->GetLogin() << "\033[0m";
 			if (m_pDocument->GetIsEditable()) std::cout << "(editor)\n";
 			else std::cout << "(viewer-only)\n";

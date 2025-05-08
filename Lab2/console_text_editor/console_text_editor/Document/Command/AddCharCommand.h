@@ -2,26 +2,27 @@
 #include <vector>
 
 #include "ICommand.h"
-//#include "../Content.h"
+#include "../Content/Content.h"
 
 
 
-/*class AddCharCommand : public ICommand {
+class AddCharCommand : public ICommand {
 public:
-	AddCharCommand(std::vector<Line> lines) {
-		m_state_lines = lines;
+	AddCharCommand(std::vector<char> data) {
+		m_data = data;
 	}
 	~AddCharCommand() {
 
 	}
 
-	std::vector<Line> BringToState() override {
-		return m_state_lines;
+	void BringToState(Content* pContent)  override {
+		pContent->GetData() = m_data;
 	}
 
-	void AddChar(char ch, Line& line, int pos_x) {
-		line.AddChar(ch, pos_x);
+	void AddChar(Content* pContent, char ch) {
+		pContent->AddChar(ch);
 	}
+
 private:
-	std::vector<Line> m_state_lines;
-};*/
+	std::vector<char> m_data;
+};
