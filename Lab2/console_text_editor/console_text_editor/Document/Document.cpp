@@ -11,6 +11,8 @@
 #include "Import/TXTImporterAdapter.h"
 #include "Command/AddCharCommand.h"
 #include "Command/DeleteCommand.h"
+#include "../File/FileDialog.h"
+#include "Import/TXTImporterAdapter.h"
 
 
 
@@ -75,6 +77,45 @@ void Document::ChangePermissionForUser(LocalStorageUserRepo* pUserRepo, User* pU
 	}
 
 	m_permisionLayers.push_back({ pUser->GetLoginHash(), 0 });
+}
+
+void Document::ImportFromFile() {
+	while (true) {
+		std::cout << "1. - Import TXT file\n";
+		std::cout << "2. - Import MD file\n";
+		std::cout << "3. - Import XML file\n";
+
+		char in;
+		std::cin >> in;
+
+		IContentImporter* pContent_importer = nullptr;
+
+		if (in == '1') {
+			auto path = FileDialog::FileDialogLoad("Import txt", "TXT Files (*.txt)\0*.txt\0");
+
+			pContent_importer = new TXTImporterAdapter();
+
+			m_content = pContent_importer->Import(path);
+			m_content.SetIsEditable(m_isEditable);
+
+			delete pContent_importer;
+
+			break;
+		}
+		else if (in == '2') {
+			auto path = FileDialog::FileDialogLoad("Import md", "MD Files (*.md)\0*.md\0");
+
+			break;
+		}
+		else if (in == '3') {
+			auto path = FileDialog::FileDialogLoad("Import xml", "XML Files (*.xml)\0*.xml\0");
+
+			break;
+		}
+		else {
+			std::cout << "Incorrect input!";
+		}
+	}
 }
 
 void Document::Edit(User* pUser) {

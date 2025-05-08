@@ -1,5 +1,6 @@
 #pragma once
 #include <vector>
+#include <iostream>
 
 
 
@@ -17,7 +18,11 @@ public:
 	}
 
 private:
+	void Print();
+
+private:
 	bool m_isEditable;
 
 	std::vector<char> m_data;
+	int cursor_pos = 0;
 };

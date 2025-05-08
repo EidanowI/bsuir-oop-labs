@@ -25,6 +25,9 @@ public:
 	void PrintAllUsers(LocalStorageUserRepo* pUserRepo);
 	void ChangePermissionForUser(LocalStorageUserRepo* pUserRepo, User* pUser);
 
+
+	void ImportFromFile();
+
 	void SaveDocument(ISaverStrategy* saver);///Strategy patern
 
 	bool GetIsEditable() {
