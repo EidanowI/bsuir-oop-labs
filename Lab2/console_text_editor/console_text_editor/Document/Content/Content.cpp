@@ -201,3 +201,51 @@ void Content::MoveCursorRight() {
 
     Print();
 }
+
+void Content::MoveHLLeft() {
+    if (cursor_pos > 0) {
+        cursor_pos--;
+    }
+
+    if (m_textSelection_highlight.end == 0) {
+        m_textSelection_highlight.end = cursor_pos + 1;
+    }
+    m_textSelection_highlight.begin = cursor_pos;
+
+    Print();
+}
+void Content::MoveHLRight() {
+    if (cursor_pos < m_data.size()) {
+        cursor_pos++;
+    }
+
+    if (m_textSelection_highlight.begin == 0) {
+        m_textSelection_highlight.begin = cursor_pos - 1;
+    }
+    m_textSelection_highlight.end = cursor_pos;
+
+    Print();
+}
+
+void Content::CopyToClipboard() {
+    if (OpenClipboard(NULL)) {
+        EmptyClipboard();
+
+        std::vector<char> bb;
+        int i = m_textSelection_highlight.begin;
+        while (i != m_textSelection_highlight.end) {
+            bb.push_back(m_data[i]);
+
+            i++;
+        }
+        bb.push_back(0);
+
+        HGLOBAL hGlobal = GlobalAlloc(GMEM_MOVEABLE, bb.size() + 1);
+        if (hGlobal) {
+            memcpy(GlobalLock(hGlobal), bb.data(), bb.size() + 1);
+            GlobalUnlock(hGlobal);
+            SetClipboardData(CF_TEXT, hGlobal);
+        }
+        CloseClipboard();
+    }
+}
