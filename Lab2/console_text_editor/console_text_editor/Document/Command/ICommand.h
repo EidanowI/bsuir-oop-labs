@@ -1,12 +1,8 @@
 #pragma once
-#include <vector>
-#include "../Content/Content.h"
 
 
 
 class ICommand {
 public:
-	virtual ~ICommand(){}
-
-	virtual void BringToState(Content* pContent) = 0;
+	virtual void Apply(char* pContent) = 0;
 };

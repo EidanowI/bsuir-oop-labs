@@ -1,6 +1,7 @@
 #pragma once
 #include <vector>
 #include <iostream>
+#include "../HistoryManager.h"
 
 
 
@@ -35,4 +36,6 @@ private:
 
 	std::vector<char> m_data;
 	int cursor_pos = 0;
+
+	HestoryManager m_history_manager;
 };

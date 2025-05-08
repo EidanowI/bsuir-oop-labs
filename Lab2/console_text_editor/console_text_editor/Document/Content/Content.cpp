@@ -2,6 +2,8 @@
 #include <conio.h>
 #include <iostream>
 #include <windows.h>
+#include "../Command/AddCharCommand.h"
+
 
 
 
@@ -34,6 +36,22 @@ bool Content::Edit() {
                     system("CLS");
                     return ret;
                 }
+                else if (in == 26) {
+                    auto u = m_history_manager.Undo();
+                    if (u) {
+                        u->Apply((char*)this);
+                        cursor_pos = m_data.size();
+                        Print();
+                    }       
+                }
+                else if (in == 24) {
+                    auto u = m_history_manager.Redo();
+                    if (u) {
+                        u->Apply((char*)this);
+                        cursor_pos = m_data.size();
+                        Print();
+                    }
+                }
                 else if (in == 8) {
                     if (m_isEditable) {
                         ret = true;
@@ -50,7 +68,12 @@ bool Content::Edit() {
                 {
                     if (m_isEditable) {
                         ret = true;
-                        AddChar(in);
+
+                        AddCharCommand* command = new AddCharCommand(m_data);
+                        m_history_manager.AddCommand(command);
+                        //command->AddChar(this, (char)in);
+
+                        command->AddChar(this, (char)in);
                     }
                 }
             }

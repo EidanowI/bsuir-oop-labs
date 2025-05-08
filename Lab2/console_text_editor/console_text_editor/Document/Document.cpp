@@ -10,7 +10,6 @@
 #include "../User/User.h"
 #include "Import/TXTImporterAdapter.h"
 #include "Command/AddCharCommand.h"
-#include "Command/DeleteCommand.h"
 #include "../File/FileDialog.h"
 #include "Import/TXTImporterAdapter.h"
 #include "Export/Exporters.h"

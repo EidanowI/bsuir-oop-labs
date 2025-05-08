@@ -130,6 +130,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="ConsoleDocEditorApp.cpp" />
+    <ClCompile Include="Document\Command\AddCharCommand.cpp" />
     <ClCompile Include="Document\Content\Content.cpp" />
     <ClCompile Include="Document\Document.cpp" />
     <ClCompile Include="Document\Export\Exporters.cpp" />
@@ -141,13 +142,13 @@
   <ItemGroup>
     <ClInclude Include="ConsoleDocEditorApp.h" />
     <ClInclude Include="Document\Command\AddCharCommand.h" />
-    <ClInclude Include="Document\Command\DeleteCommand.h" />
     <ClInclude Include="Document\Command\ICommand.h" />
     <ClInclude Include="Document\Content\Content.h" />
     <ClInclude Include="Document\Document.h" />
     <ClInclude Include="Document\Export\Exporters.h" />
     <ClInclude Include="Document\Export\IExporter.h" />
     <ClInclude Include="Document\Export\IExportFactory.h" />
+    <ClInclude Include="Document\HistoryManager.h" />
     <ClInclude Include="Document\Import\IContentImporter.h" />
     <ClInclude Include="Document\Import\TXTImporter.h" />
     <ClInclude Include="Document\Import\TXTImporterAdapter.h" />
