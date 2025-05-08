@@ -27,6 +27,7 @@ public:
 
 
 	void ImportFromFile();
+	void ExportToFile();
 
 	void SaveDocument(ISaverStrategy* saver);///Strategy patern
 

@@ -119,6 +119,7 @@ void ConsoleDocEditorApp::Run() {
 		}
 
 		while (true) {
+			system("CLS");
 			std::cout << "You are " << "\033[33m" << ((User*)m_pUser)->GetLogin() << "\033[0m";
 			if (m_pDocument->GetIsEditable()) std::cout << "(editor)\n";
 			else std::cout << "(viewer-only)\n";
@@ -160,7 +161,7 @@ void ConsoleDocEditorApp::Run() {
 
 			}
 			else if (in == 'E') {///export to file
-
+				m_pDocument->ExportToFile();
 			}
 			else if (in == 'D') {///edit document
 				m_pDocument->Edit((User*)m_pUser);

@@ -13,6 +13,7 @@
 #include "Command/DeleteCommand.h"
 #include "../File/FileDialog.h"
 #include "Import/TXTImporterAdapter.h"
+#include "Export/Exporters.h"
 
 
 
@@ -116,6 +117,51 @@ void Document::ImportFromFile() {
 			std::cout << "Incorrect input!";
 		}
 	}
+}
+void Document::ExportToFile() {
+	std::string file_path;
+	IExporter* pExporter;
+
+	while (true) {
+		std::cout << "1. - Export to TXT file\n";
+		std::cout << "2. - Export to MD file\n";
+		std::cout << "3. - Export to XML file\n";
+
+		char in;
+		std::cin >> in;
+		
+		if (in == '1') {
+			file_path = FileDialog::FileDialogSave("Export txt", "TXT Files (*.txt)\0*.txt\0");
+
+			TXTExportFactory factory;
+			pExporter = factory.CreateExporter();		
+
+			break;
+		}
+		else if (in == '2') {
+			file_path = FileDialog::FileDialogSave("Export md", "MD Files (*.md)\0*.md\0");
+
+			MDExportFactory factory;
+			pExporter = factory.CreateExporter();
+
+			break;
+		}
+		else if (in == '3') {
+			file_path = FileDialog::FileDialogSave("Export xml", "XML Files (*.xml)\0*.xml\0");
+
+			XMLExportFactory factory;
+			pExporter = factory.CreateExporter();
+
+			break;
+		}
+		else {
+			std::cout << "Incorrect input!";
+		}
+	}
+
+	pExporter->Export(m_content, file_path);
+
+	delete pExporter;
 }
 
 void Document::Edit(User* pUser) {

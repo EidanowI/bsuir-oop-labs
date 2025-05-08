@@ -3,10 +3,19 @@
 
 
 Content::Content(bool isEditable) : m_isEditable(isEditable){
+    m_data = std::vector<char>();
+    m_data.push_back('C');
+    m_data.push_back('+');
+    m_data.push_back('+');
+
+
     cursor_pos = m_data.size();
 }
 Content::Content(bool isEditable, std::vector<char> data) : m_isEditable(isEditable) {
-    m_data = data;
+    //m_data = data;
+    m_data.push_back('C');
+    m_data.push_back('+');
+    m_data.push_back('+');
 
     cursor_pos = m_data.size();
 }

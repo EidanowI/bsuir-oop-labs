@@ -36,6 +36,9 @@
     <ClCompile Include="Document\Content\Content.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Document\Export\Exporters.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ConsoleDocEditorApp.h">
@@ -84,6 +87,15 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Document\Content\Content.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Document\Export\IExportFactory.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Document\Export\IExporter.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Document\Export\Exporters.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

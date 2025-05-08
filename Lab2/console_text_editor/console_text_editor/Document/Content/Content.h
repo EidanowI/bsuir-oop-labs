@@ -17,11 +17,15 @@ public:
 		m_isEditable = isEditable;
 	}
 
+	std::vector<char>& GetData() {
+		return m_data;
+	}
+
 private:
 	void Print();
 
 private:
-	bool m_isEditable;
+	bool m_isEditable = false;
 
 	std::vector<char> m_data;
 	int cursor_pos = 0;
