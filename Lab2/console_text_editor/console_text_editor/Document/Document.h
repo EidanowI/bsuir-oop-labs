@@ -17,6 +17,7 @@ struct EditPermisionLayer {
 
 
 class Document {
+	friend class LocalSaver;
 public:
 	Document(LocalStorageUserRepo* pUserRepo, User* pUser, const std::string& path);///for exist document
 	Document(LocalStorageUserRepo* pUserRepo, User* pUser);///for new document

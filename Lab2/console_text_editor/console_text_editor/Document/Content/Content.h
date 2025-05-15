@@ -18,6 +18,7 @@ struct Highlight {
 };
 
 class Content {
+	friend class LocalSaver;
 public:
 	Content(bool isEditable);
 	Content(bool isEditable, std::vector<char> data);

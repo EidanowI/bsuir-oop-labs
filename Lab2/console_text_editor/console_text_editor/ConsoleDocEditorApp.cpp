@@ -157,7 +157,31 @@ void ConsoleDocEditorApp::Run() {
 				m_pDocument->ImportFromFile();
 			}
 			else if (in == 'S') {///saving .lab2 document
+				ISaverStrategy* saver_strategy = nullptr;
 
+				while (true) {
+					std::cout << "1. - Save at local machine\n";
+					std::cout << "2. Save at cloud\n";
+
+					char in;
+					std::cin >> in;
+
+					if (in == '1') {
+						saver_strategy = new LocalSaver();
+						break;
+					}
+					else if (in == '2') {
+						saver_strategy = new CloudSaver();
+						break;
+					}
+					else {
+						std::cout << "Incorect command!\n";
+					}
+				}
+
+				m_pDocument->SaveDocument(saver_strategy);
+
+				delete saver_strategy;
 			}
 			else if (in == 'E') {///export to file
 				m_pDocument->ExportToFile();

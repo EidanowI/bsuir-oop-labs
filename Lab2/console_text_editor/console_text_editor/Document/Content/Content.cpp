@@ -154,7 +154,6 @@ void Content::Paste() {
 void Content::Print(){
     system("CLS");
 
-
     for (int i = 0; i < cursor_pos; i++) {
         if (m_textSelection_highlight.begin != m_textSelection_highlight.end) {
             if (m_textSelection_highlight.begin == i) {

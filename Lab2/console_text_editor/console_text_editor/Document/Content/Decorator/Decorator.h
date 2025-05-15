@@ -1,13 +1,21 @@
 #pragma once
 #include <iostream>
+#include <vector>
 
 
+
+struct Specs {
+	int beg;
+	int end;
+	char type;
+};
 
 class IFormator {
 public:
 	virtual ~IFormator() {};
 
 	virtual void CharDecorate(int cursor_pos) = 0;
+	virtual std::vector<Specs> CalcDecsCount(std::vector<Specs>) = 0;
 };
 
 
@@ -23,6 +31,9 @@ public:
 	void CharDecorate(int cursor_pos) override {
 
 	}
+	std::vector<Specs> CalcDecsCount(std::vector<Specs> specs)override {
+		return specs;
+	}
 };
 
 
@@ -37,6 +48,9 @@ public:
 
 	void CharDecorate(int cursor_pos) override {
 		return m_pOrigin->CharDecorate(cursor_pos);
+	}
+	std::vector<Specs> CalcDecsCount(std::vector<Specs> specs)override {
+		return specs;
 	}
 private:
 	IFormator* m_pOrigin;
@@ -62,6 +76,11 @@ public:
 		}
 
 		return BaseFormator::CharDecorate(cursor_pos);
+	}
+
+	std::vector<Specs> CalcDecsCount(std::vector<Specs> specs)override {
+		specs.push_back({ m_begin, m_end, 'B' });
+		return specs;
 	}
 
 private:
@@ -90,6 +109,10 @@ public:
 
 		return BaseFormator::CharDecorate(cursor_pos);
 	}
+	std::vector<Specs> CalcDecsCount(std::vector<Specs> specs)override {
+		specs.push_back({ m_begin, m_end, 'I' });
+		return specs;
+	}
 
 private:
 	int m_begin;
@@ -116,6 +139,10 @@ public:
 		}
 
 		return BaseFormator::CharDecorate(cursor_pos);
+	}
+	std::vector<Specs> CalcDecsCount(std::vector<Specs> specs)override {
+		specs.push_back({ m_begin, m_end, 'U' });
+		return specs;
 	}
 
 private:

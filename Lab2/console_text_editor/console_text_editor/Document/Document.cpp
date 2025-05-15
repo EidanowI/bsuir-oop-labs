@@ -18,16 +18,25 @@
 
 Document::Document(LocalStorageUserRepo* pUserRepo, User* pUser, const std::string& path) : m_content(true)
 {
-	/*for (auto it = pUserRepo->GetAllUsers().begin(); it != pUserRepo->GetAllUsers().end(); ++it) {
-		User* it_pUser = (User*)*it;
+	m_isEditable = false;
 
-		if (it_pUser->CompareToByLogin((User*)pUser)) {
+	std::ifstream ifs(path, std::ios::binary);
 
+	int perm_count = 0;
+	ifs.read((char*) & perm_count, 4);
+	m_permisionLayers = std::vector<EditPermisionLayer>(perm_count);
+
+	
+	for (int i = 0; i < perm_count; i++) {
+		ifs.read((char*)&m_permisionLayers[i], sizeof(EditPermisionLayer));
+
+		if (m_permisionLayers[i]._login_hash == pUser->GetLoginHash()) {
+			m_isEditable = true;
 		}
-		else {
+	}
 
-		}
-	}*/
+
+
 }
 Document::Document(LocalStorageUserRepo* pUserRepo, User* pUser) : m_content(true)
 {
@@ -161,6 +170,10 @@ void Document::ExportToFile() {
 	pExporter->Export(m_content, file_path);
 
 	delete pExporter;
+}
+
+void Document::SaveDocument(ISaverStrategy* saver) {
+	saver->Save(this);
 }
 
 void Document::Edit(User* pUser) {
