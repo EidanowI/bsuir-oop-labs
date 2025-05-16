@@ -110,5 +110,8 @@
     <ClInclude Include="Document\Content\Decorator\Decorator.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Document\Command\DecCommands.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

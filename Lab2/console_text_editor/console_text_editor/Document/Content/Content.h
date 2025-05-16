@@ -39,8 +39,8 @@ public:
 	void DeleteChar();
 	void Paste();
 
-private:
 	void Print();
+private:
 
 	void MoveCursorLeft();
 	void MoveCursorRight();
@@ -59,6 +59,6 @@ private:
 	HestoryManager m_history_manager;
 
 	Highlight m_textSelection_highlight;
-
+public:
 	IFormator* m_pFormator;
 };

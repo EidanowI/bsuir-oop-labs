@@ -142,6 +142,7 @@
   <ItemGroup>
     <ClInclude Include="ConsoleDocEditorApp.h" />
     <ClInclude Include="Document\Command\AddCharCommand.h" />
+    <ClInclude Include="Document\Command\DecCommands.h" />
     <ClInclude Include="Document\Command\DeleteChar.h" />
     <ClInclude Include="Document\Command\ICommand.h" />
     <ClInclude Include="Document\Command\PasteCommand.h" />

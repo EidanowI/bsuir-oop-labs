@@ -5,6 +5,7 @@
 #include "../Command/AddCharCommand.h"
 #include "../Command/DeleteChar.h"
 #include "../Command/PasteCommand.h"
+#include "../Command/DecCommands.h"
 
 
 
@@ -12,6 +13,8 @@ Content::Content(bool isEditable) : m_isEditable(isEditable){
     m_data = std::vector<char>();
 
     cursor_pos = m_data.size();
+
+    m_pFormator = new Formator();
 }
 Content::Content(bool isEditable, std::vector<char> data) : m_isEditable(isEditable) {
     m_data = data;
@@ -24,8 +27,6 @@ Content::~Content() {
 
 /*Thats shit will return true if the content was changed so we need to record date*/
 bool Content::Edit() {
-    m_pFormator = new UnderlineFormater(2, 4, new BoldFormater(5, 8, new Formator()));
-
     bool ret = false;
 
     Print();
@@ -39,6 +40,32 @@ bool Content::Edit() {
                     system("CLS");
                     return ret;
                 }
+
+                else if (in == 17) {///ctrl + Q
+                    if (m_isEditable) {
+                        ret = true;
+                        MakeBold* command = new MakeBold(m_pFormator);
+                        m_history_manager.AddCommand(command);
+                        command->AddBold(this, m_textSelection_highlight.begin, m_textSelection_highlight.end);
+                    }
+                }
+                else if (in == 23) {///ctrl + W
+                    if (m_isEditable) {
+                        ret = true;
+                        MakeItalic* command = new MakeItalic(m_pFormator);
+                        m_history_manager.AddCommand(command);
+                        command->AddBold(this, m_textSelection_highlight.begin, m_textSelection_highlight.end);
+                    }
+                }
+                else if (in == 5) {///ctrl + E
+                    if (m_isEditable) {
+                        ret = true;
+                        MakeUnder* command = new MakeUnder(m_pFormator);
+                        m_history_manager.AddCommand(command);
+                        command->AddBold(this, m_textSelection_highlight.begin, m_textSelection_highlight.end);
+                    }
+                }
+
                 else if (in == 26) {
                     if (m_isEditable) {
                         auto u = m_history_manager.Undo();
