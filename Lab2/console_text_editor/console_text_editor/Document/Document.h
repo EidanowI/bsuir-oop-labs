@@ -30,7 +30,7 @@ public:
 	void ImportFromFile();
 	void ExportToFile();
 
-	void SaveDocument(ISaverStrategy* saver);///Strategy patern
+	void SaveDocument(const std::string& name,ISaverStrategy* saver);///Strategy patern
 
 	bool GetIsEditable() {
 		return m_isEditable;

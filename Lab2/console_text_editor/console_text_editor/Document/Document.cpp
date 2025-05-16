@@ -35,14 +35,29 @@ Document::Document(LocalStorageUserRepo* pUserRepo, User* pUser, const std::stri
 		}
 	}
 
+	int buf_size = 0;
+	ifs.read((char*)&buf_size, 4);
+	char* buf = new char[buf_size] {};
+	ifs.read(buf, buf_size);
 
+	m_content.GetData() = std::vector<char>(buf_size);
 
+	for (int i = 0; i < buf_size; i++) {
+		m_content.GetData()[i] = buf[i];
+	}
+
+	delete[] buf;
+	ifs.close();
+
+	m_content.SetIsEditable(m_isEditable);
 }
 Document::Document(LocalStorageUserRepo* pUserRepo, User* pUser) : m_content(true)
 {
 	m_isEditable = true;
 
 	m_permisionLayers.push_back({ pUser->GetLoginHash(), 0 });
+
+	m_content.SetIsEditable(m_isEditable);
 }
 Document::~Document() {
 
@@ -172,8 +187,25 @@ void Document::ExportToFile() {
 	delete pExporter;
 }
 
-void Document::SaveDocument(ISaverStrategy* saver) {
-	saver->Save(this);
+void Document::SaveDocument(const std::string& name, ISaverStrategy* saver) {
+	std::ofstream ofs("Docs/" + name + ".lab2", std::ios::binary);
+
+	int perm_count = m_permisionLayers.size();
+
+	ofs.write((char*)&perm_count, 4);
+
+	for (int i = 0; i < perm_count; i++) {
+		ofs.write((char*)&m_permisionLayers[i], sizeof(EditPermisionLayer));
+	}
+
+	int data_size = m_content.GetData().size();
+
+	ofs.write((char*)&data_size, 4);
+	ofs.write(m_content.GetData().data(), data_size);
+
+	///TODO formator
+
+	ofs.close();
 }
 
 void Document::Edit(User* pUser) {

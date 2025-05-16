@@ -107,7 +107,11 @@ void ConsoleDocEditorApp::Run() {
 				break;///give user inside new doc() and new doc().isEditable();
 			}
 			else if (in == '2') {
-				auto path = FileDialog::FileDialogLoad("Open file");
+				std::string name;
+				std::cout << "Write file name without extension: ";
+				std::cin >> name;
+
+				std::string path = "Docs/" + name + ".lab2";
 
 				m_pDocument = new Document((LocalStorageUserRepo*)m_pUser_repo, (User*)m_pUser, path);
 
@@ -159,19 +163,22 @@ void ConsoleDocEditorApp::Run() {
 			else if (in == 'S') {///saving .lab2 document
 				ISaverStrategy* saver_strategy = nullptr;
 
+				std::string file_name;
+				std::cout << "Enter file name without extension: ";
+				std::cin >> file_name;
+
 				while (true) {
-					std::cout << "1. - Save at local machine\n";
-					std::cout << "2. Save at cloud\n";
+					std::cout << "1. - No options\n";
+					std::cout << "2. Save with cloud\n";
 
 					char in;
 					std::cin >> in;
 
 					if (in == '1') {
-						saver_strategy = new LocalSaver();
 						break;
 					}
 					else if (in == '2') {
-						saver_strategy = new CloudSaver();
+						saver_strategy = new CloudStrategy();
 						break;
 					}
 					else {
@@ -179,7 +186,7 @@ void ConsoleDocEditorApp::Run() {
 					}
 				}
 
-				m_pDocument->SaveDocument(saver_strategy);
+				m_pDocument->SaveDocument(file_name, saver_strategy);
 
 				delete saver_strategy;
 			}

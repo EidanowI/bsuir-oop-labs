@@ -39,9 +39,6 @@
     <ClCompile Include="Document\Export\Exporters.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Document\Command\AddCharCommand.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Document\Command\Command.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -108,6 +105,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Document\Command\PasteCommand.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Document\Content\Decorator\Decorator.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
