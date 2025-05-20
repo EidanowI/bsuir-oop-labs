@@ -13,6 +13,7 @@
 #include "../File/FileDialog.h"
 #include "Import/TXTImporterAdapter.h"
 #include "Export/Exporters.h"
+#include "Content/Decorator/Decorator.h"
 
 
 
@@ -20,7 +21,7 @@ Document::Document(LocalStorageUserRepo* pUserRepo, User* pUser, const std::stri
 {
 	m_isEditable = false;
 
-	std::ifstream ifs(path, std::ios::binary);
+	std::ifstream ifs("Docs/" + path + ".lab2");
 
 	int perm_count = 0;
 	ifs.read((char*) & perm_count, 4);
@@ -47,6 +48,26 @@ Document::Document(LocalStorageUserRepo* pUserRepo, User* pUser, const std::stri
 	}
 
 	delete[] buf;
+	
+
+	int form_size = 0;
+	ifs.read((char*)&form_size, 4);
+
+	for (int i = 0; i < form_size; i++) {
+		Specs tmp;
+		ifs.read((char*)&tmp, sizeof(Specs));
+		if (tmp.type == 'B') {
+			m_content.m_pFormator = new BoldFormater(tmp.beg, tmp.end, m_content.m_pFormator);
+		}
+		else if (tmp.type == 'I') {
+			m_content.m_pFormator = new ItalicFormater(tmp.beg, tmp.end, m_content.m_pFormator);
+		}
+		else
+		{
+			m_content.m_pFormator = new UnderlineFormater(tmp.beg, tmp.end, m_content.m_pFormator);
+		}
+	}
+
 	ifs.close();
 
 	m_content.SetIsEditable(m_isEditable);
@@ -202,6 +223,17 @@ void Document::SaveDocument(const std::string& name, ISaverStrategy* saver) {
 
 	ofs.write((char*)&data_size, 4);
 	ofs.write(m_content.GetData().data(), data_size);
+
+	std::vector<Specs> decs;
+	m_content.m_pFormator->CalcDecsCount(&decs);
+
+	int form_size = decs.size();
+	ofs.write((char*)&form_size, 4);
+
+	for (int i = 0; i < form_size; i++) {
+		ofs.write((char*)&decs[i], sizeof(Specs));
+	}
+
 
 	///TODO formator
 

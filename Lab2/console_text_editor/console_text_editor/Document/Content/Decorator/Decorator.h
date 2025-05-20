@@ -50,9 +50,9 @@ public:
 		return m_pOrigin->CharDecorate(cursor_pos);
 	}
 	std::vector<Specs>* CalcDecsCount(std::vector<Specs>* specs)override {
-		return specs;
+		return m_pOrigin->CalcDecsCount(specs);
 	}
-private:
+protected:
 	IFormator* m_pOrigin;
 };
 
@@ -80,7 +80,7 @@ public:
 
 	std::vector<Specs>* CalcDecsCount(std::vector<Specs>* specs)override {
 		specs->push_back({ m_begin, m_end, 'B' });
-		return specs;
+		return m_pOrigin->CalcDecsCount(specs);
 	}
 
 private:
@@ -111,7 +111,7 @@ public:
 	}
 	std::vector<Specs>* CalcDecsCount(std::vector<Specs>* specs)override {
 		specs->push_back({ m_begin, m_end, 'I' });
-		return specs;
+		return m_pOrigin->CalcDecsCount(specs);
 	}
 
 private:
@@ -142,7 +142,7 @@ public:
 	}
 	std::vector<Specs>* CalcDecsCount(std::vector<Specs>* specs)override {
 		specs->push_back({ m_begin, m_end, 'U' });
-		return specs;
+		return m_pOrigin->CalcDecsCount(specs);
 	}
 
 private:

@@ -111,7 +111,7 @@ void ConsoleDocEditorApp::Run() {
 				std::cout << "Write file name without extension: ";
 				std::cin >> name;
 
-				std::string path = "Docs/" + name + ".lab2";
+				std::string path = name;
 
 				m_pDocument = new Document((LocalStorageUserRepo*)m_pUser_repo, (User*)m_pUser, path);
 
@@ -140,6 +140,7 @@ void ConsoleDocEditorApp::Run() {
 			std::cin >> in;
 
 			if (in == 'Q') {
+				m_pUser = nullptr;
 				break;
 			}
 			else if (in == 'C' && m_pUser->IsAdmin()) {///change permissions
