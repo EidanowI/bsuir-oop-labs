@@ -134,12 +134,14 @@
     <ClCompile Include="Document\Content\Content.cpp" />
     <ClCompile Include="Document\Document.cpp" />
     <ClCompile Include="Document\Export\Exporters.cpp" />
+    <ClCompile Include="Document\Export\tinyxml2.cpp" />
     <ClCompile Include="Document\Import\Import.cpp" />
     <ClCompile Include="File\FileDialog.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="User\User.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\..\..\..\GitHub_Projects\tmp\tmp\BSUIR-Labs\TextEditor(LR 2)\json.hpp" />
     <ClInclude Include="ConsoleDocEditorApp.h" />
     <ClInclude Include="Document\Command\AddCharCommand.h" />
     <ClInclude Include="Document\Command\DecCommands.h" />
@@ -152,6 +154,8 @@
     <ClInclude Include="Document\Export\Exporters.h" />
     <ClInclude Include="Document\Export\IExporter.h" />
     <ClInclude Include="Document\Export\IExportFactory.h" />
+    <ClInclude Include="Document\Export\json.hpp" />
+    <ClInclude Include="Document\Export\tinyxml2.h" />
     <ClInclude Include="Document\HistoryManager.h" />
     <ClInclude Include="Document\Import\IContentImporter.h" />
     <ClInclude Include="Document\Import\TXTImporter.h" />

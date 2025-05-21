@@ -50,7 +50,7 @@ private:
 
 	void CopyToClipboard();
 
-private:
+public:
 	bool m_isEditable = false;
 
 	std::vector<char> m_data;

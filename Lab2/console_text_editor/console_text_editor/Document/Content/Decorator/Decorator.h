@@ -1,6 +1,8 @@
 #pragma once
 #include <iostream>
 #include <vector>
+#include <fstream>
+#include <sstream>
 
 
 
@@ -15,6 +17,8 @@ public:
 	virtual ~IFormator() {};
 
 	virtual void CharDecorate(int cursor_pos) = 0;
+	virtual void CharDecorate(int cursor_pos, std::ofstream& ofs) = 0;
+	virtual void CharDecorate(int cursor_pos, std::stringstream& ofs) = 0;
 	virtual std::vector<Specs>* CalcDecsCount(std::vector<Specs>*) = 0;
 };
 
@@ -29,6 +33,12 @@ public:
 	}
 
 	void CharDecorate(int cursor_pos) override {
+
+	}
+	void CharDecorate(int cursor_pos, std::ofstream& ofs) override {
+
+	}
+	void CharDecorate(int cursor_pos, std::stringstream& ofs) override {
 
 	}
 	std::vector<Specs>* CalcDecsCount(std::vector<Specs>* specs)override {
@@ -48,6 +58,12 @@ public:
 
 	void CharDecorate(int cursor_pos) override {
 		return m_pOrigin->CharDecorate(cursor_pos);
+	}
+	void CharDecorate(int cursor_pos, std::ofstream& ofs) override {
+		return m_pOrigin->CharDecorate(cursor_pos, ofs);
+	}
+	void CharDecorate(int cursor_pos, std::stringstream& ofs) override {
+		return m_pOrigin->CharDecorate(cursor_pos, ofs);
 	}
 	std::vector<Specs>* CalcDecsCount(std::vector<Specs>* specs)override {
 		return m_pOrigin->CalcDecsCount(specs);
@@ -76,6 +92,26 @@ public:
 		}
 
 		return BaseFormator::CharDecorate(cursor_pos);
+	}
+	void CharDecorate(int cursor_pos, std::ofstream& ofs) override {
+		if (m_begin == cursor_pos) {
+			ofs << "**";
+		}
+		if (m_end == cursor_pos) {
+			ofs << "**";
+		}
+
+		return BaseFormator::CharDecorate(cursor_pos, ofs);
+	}
+	void CharDecorate(int cursor_pos, std::stringstream& ofs) override {
+		if (m_begin == cursor_pos) {
+			ofs << "**";
+		}
+		if (m_end == cursor_pos) {
+			ofs << "**";
+		}
+
+		return BaseFormator::CharDecorate(cursor_pos, ofs);
 	}
 
 	std::vector<Specs>* CalcDecsCount(std::vector<Specs>* specs)override {
@@ -109,6 +145,26 @@ public:
 
 		return BaseFormator::CharDecorate(cursor_pos);
 	}
+	void CharDecorate(int cursor_pos, std::ofstream& ofs) override {
+		if (m_begin == cursor_pos) {
+			ofs << "*";
+		}
+		if (m_end == cursor_pos) {
+			ofs << "*";
+		}
+
+		return BaseFormator::CharDecorate(cursor_pos, ofs);
+	}
+	void CharDecorate(int cursor_pos, std::stringstream& ofs) override {
+		if (m_begin == cursor_pos) {
+			ofs << "*";
+		}
+		if (m_end == cursor_pos) {
+			ofs << "*";
+		}
+
+		return BaseFormator::CharDecorate(cursor_pos, ofs);
+	}
 	std::vector<Specs>* CalcDecsCount(std::vector<Specs>* specs)override {
 		specs->push_back({ m_begin, m_end, 'I' });
 		return m_pOrigin->CalcDecsCount(specs);
@@ -139,6 +195,26 @@ public:
 		}
 
 		return BaseFormator::CharDecorate(cursor_pos);
+	}
+	void CharDecorate(int cursor_pos, std::ofstream& ofs) override {
+		if (m_begin == cursor_pos) {
+			ofs << "_";
+		}
+		if (m_end == cursor_pos) {
+			ofs << "_";
+		}
+
+		return BaseFormator::CharDecorate(cursor_pos, ofs);
+	}
+	void CharDecorate(int cursor_pos, std::stringstream& ofs) override {
+		if (m_begin == cursor_pos) {
+			ofs << "_";
+		}
+		if (m_end == cursor_pos) {
+			ofs << "_";
+		}
+
+		return BaseFormator::CharDecorate(cursor_pos, ofs);
 	}
 	std::vector<Specs>* CalcDecsCount(std::vector<Specs>* specs)override {
 		specs->push_back({ m_begin, m_end, 'U' });

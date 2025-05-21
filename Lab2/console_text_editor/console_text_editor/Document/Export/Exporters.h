@@ -38,6 +38,23 @@ public:
 };
 
 
+class JSONExportFactory : public IExportFactory {
+public:
+	JSONExportFactory();
+	~JSONExportFactory();
+
+	IExporter* CreateExporter() override;
+};
+
+class JSONExporter : public IExporter {
+public:
+	JSONExporter();
+	~JSONExporter();
+
+	void Export(Content& content, const std::string& path) override;
+};
+
+
 class XMLExportFactory : public IExportFactory {
 public:
 	XMLExportFactory();

@@ -130,7 +130,7 @@ void ConsoleDocEditorApp::Run() {
 			std::cout << "Q. - To menu\n";
 			if(m_pUser->IsAdmin()) std::cout << "C. - Change permissions\n";
 			std::cout << "L. - To show editors and their dates\n";
-			std::cout << "I. - Import from file\n";
+			//std::cout << "I. - Import from file\n";
 			std::cout << "S. - Saving .lab2 document\n";
 			std::cout << "E. - Export to file\n";
 			std::cout << "D - Edit document\n";	
@@ -158,9 +158,9 @@ void ConsoleDocEditorApp::Run() {
 				system("CLS");
 				m_pDocument->PrintAllUsers((LocalStorageUserRepo*)m_pUser_repo);
 			}
-			else if (in == 'I') {///import from file
-				m_pDocument->ImportFromFile();
-			}
+			//else if (in == 'I') {///import from file
+			//	m_pDocument->ImportFromFile();
+			//}
 			else if (in == 'S') {///saving .lab2 document
 				ISaverStrategy* saver_strategy = nullptr;
 

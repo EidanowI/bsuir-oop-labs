@@ -169,13 +169,17 @@ void Document::ExportToFile() {
 	while (true) {
 		std::cout << "1. - Export to TXT file\n";
 		std::cout << "2. - Export to MD file\n";
-		std::cout << "3. - Export to XML file\n";
+		std::cout << "3. - Export to JSON file\n";
+		std::cout << "4. - Export to XML file\n";
 
 		char in;
 		std::cin >> in;
 		
 		if (in == '1') {
-			file_path = FileDialog::FileDialogSave("Export txt", "TXT Files (*.txt)\0*.txt\0");
+			std::cout << "Write .txt file name: ";
+			std::cin >> file_path;
+
+			file_path = "Docs/" + file_path + ".txt";
 
 			TXTExportFactory factory;
 			pExporter = factory.CreateExporter();		
@@ -183,7 +187,10 @@ void Document::ExportToFile() {
 			break;
 		}
 		else if (in == '2') {
-			file_path = FileDialog::FileDialogSave("Export md", "MD Files (*.md)\0*.md\0");
+			std::cout << "Write .md file name: ";
+			std::cin >> file_path;
+
+			file_path = "Docs/" + file_path + ".md";
 
 			MDExportFactory factory;
 			pExporter = factory.CreateExporter();
@@ -191,7 +198,21 @@ void Document::ExportToFile() {
 			break;
 		}
 		else if (in == '3') {
-			file_path = FileDialog::FileDialogSave("Export xml", "XML Files (*.xml)\0*.xml\0");
+			std::cout << "Write .json file name: ";
+			std::cin >> file_path;
+
+			file_path = "Docs/" + file_path + ".json";
+
+			JSONExportFactory factory;
+			pExporter = factory.CreateExporter();
+
+			break;
+		}
+		else if (in == '4') {
+			std::cout << "Write .xml file name: ";
+			std::cin >> file_path;
+
+			file_path = "Docs/" + file_path + ".xml";
 
 			XMLExportFactory factory;
 			pExporter = factory.CreateExporter();
@@ -233,7 +254,6 @@ void Document::SaveDocument(const std::string& name, ISaverStrategy* saver) {
 	for (int i = 0; i < form_size; i++) {
 		ofs.write((char*)&decs[i], sizeof(Specs));
 	}
-
 
 	///TODO formator
 
