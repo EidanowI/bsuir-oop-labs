@@ -258,6 +258,10 @@ void Document::SaveDocument(const std::string& name, ISaverStrategy* saver) {
 	///TODO formator
 
 	ofs.close();
+
+	if (saver) {
+		saver->Save(name);
+	}
 }
 
 void Document::Edit(User* pUser) {
